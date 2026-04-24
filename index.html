@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>TRADE WINNER PRO | Boleta Inteligente para MT5</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0c12;
+      font-family: 'Inter', sans-serif;
+      color: #eef2ff;
+      line-height: 1.5;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* cabeçalho */
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #f5b042, #f28705);
+      color: #0a0c12;
+      font-weight: 800;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff, #f5b042);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .sub {
+      color: #9ca3af;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* grade principal */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (max-width: 800px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    /* card */
+    .card {
+      background: #11141c;
+      border-radius: 32px;
+      border: 1px solid #2a2f3a;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #f5b04260;
+      box-shadow: 0 25px 40px -12px #f5b04220;
+    }
+
+    .card-header {
+      background: #1a1f2a;
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid #2a2f3a;
+    }
+
+    .card-header h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    /* imagem da boleta */
+    .boleta-img {
+      width: 100%;
+      border-radius: 20px;
+      background: #0f1119;
+      border: 1px solid #2a2f3a;
+      margin-bottom: 0.5rem;
+    }
+
+    .boleta-img img {
+      width: 100%;
+      display: block;
+      border-radius: 20px;
+    }
+
+    /* formulário */
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: #cbd5e6;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: #0f1119;
+      border: 1px solid #2a2f3a;
+      border-radius: 16px;
+      color: #fff;
+      font-family: 'Inter', monospace;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #f5b042;
+      box-shadow: 0 0 0 3px #f5b04230;
+    }
+
+    button {
+      background: linear-gradient(135deg, #f5b042, #f28705);
+      border: none;
+      width: 100%;
+      padding: 0.9rem;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 40px;
+      color: #0a0c12;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 0.5rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    button:hover {
+      transform: scale(0.98);
+      filter: brightness(1.05);
+    }
+
+    .download-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .btn-download {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #1a1f2a;
+      border: 1px solid #2a2f3a;
+      border-radius: 60px;
+      padding: 0.8rem 1.5rem;
+      text-decoration: none;
+      color: #eef2ff;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .btn-download:hover {
+      background: #f5b04220;
+      border-color: #f5b042;
+      transform: translateX(4px);
+    }
+
+    .btn-download span:first-child {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-small {
+      font-size: 0.7rem;
+      background: #2a2f3a;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      color: #ccc;
+    }
+
+    hr {
+      border-color: #2a2f3a;
+      margin: 1rem 0;
+    }
+
+    .contato {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid #2a2f3a;
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+
+    .contato a {
+      color: #f5b042;
+      text-decoration: none;
+    }
+
+    .warning {
+      background: #f5b04210;
+      border-left: 4px solid #f5b042;
+      padding: 0.8rem;
+      border-radius: 16px;
+      margin: 1rem 0;
+      font-size: 0.75rem;
+    }
+
+    @keyframes confetti {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="badge">⚡ PROFISSIONAL · MT5</div>
+    <h1>TRADE WINNER PRO</h1>
+    <div class="sub">Painel de controle · Múltiplos TPs · Break even · Gestão de risco</div>
+  </div>
+
+  <div class="grid-2">
+    <!-- COLUNA ESQUERDA: IMAGEM DA BOLETA + DOWNLOADS -->
+    <div class="card">
+      <div class="card-header">
+        <h2>📟 Boleta TRADE WINNER</h2>
+      </div>
+      <div class="card-body">
+        <div class="boleta-img">
+          <!-- Coloque sua imagem boleta.png no mesmo diretório -->
+          <img src="boleta.png" alt="Painel TRADE WINNER Pro">
+        </div>
+        <p style="margin: 1rem 0 0.5rem; font-size: 0.8rem; color: #aaa;">Interface completa: SL/TP ajustáveis, parciais 25/50/75%, ordens pendentes, BE, trailing e relatórios automáticos.</p>
+        
+        <hr>
+        <div class="download-buttons">
+          <a href="TRADE_WINNER_Pro.ex5" download class="btn-download">
+            <span>📥 <strong>Baixar EA (TRADE WINNER Pro.ex5)</strong></span>
+            <span class="btn-small">MetaTrader 5</span>
+          </a>
+          <a href="Manual_TRADE_WINNER.pdf" download class="btn-download">
+            <span>📘 <strong>Manual Completo · Instalação e Funções</strong></span>
+            <span class="btn-small">PDF</span>
+          </a>
+        </div>
+
+        <div class="warning">
+          ⚠️ <strong>Importante:</strong> Após o download, coloque o EA na pasta <code>MQL5/Experts/</code>, compile e arraste para o gráfico M1 de <strong>XAUUSD</strong>. Período de teste 7 dias.
+        </div>
+      </div>
+    </div>
+
+    <!-- COLUNA DIREITA: CADASTRO + ACESSO -->
+    <div class="card">
+      <div class="card-header">
+        <h2>🔐 Cadastre‑se e receba sua chave</h2>
+      </div>
+      <div class="card-body">
+        <p style="margin-bottom: 1.2rem;">Preencha os dados abaixo. Enviaremos sua <strong>licença definitiva</strong> e atualizações diretamente no seu WhatsApp/e‑mail.</p>
+        
+        <!-- FORMULÁRIO GRATUITO com Formspree (substitua o ID pelo seu) -->
+        <form action="https://formspree.io/f/SEU-ENDPOINT-AQUI" method="POST">
+          <div class="form-group">
+            <label>👤 Nome completo</label>
+            <input type="text" name="nome" required placeholder="Ex: João Silva">
+          </div>
+          <div class="form-group">
+            <label>📧 E‑mail</label>
+            <input type="email" name="email" required placeholder="voce@exemplo.com">
+          </div>
+          <div class="form-group">
+            <label>📱 WhatsApp (com DDD)</label>
+            <input type="tel" name="whatsapp" required placeholder="(41) 99999-9999">
+          </div>
+          <div class="form-group">
+            <label>💡 Como conheceu o TRADE WINNER?</label>
+            <select name="origem">
+              <option>WhatsApp</option>
+              <option>Telegram</option>
+              <option>YouTube</option>
+              <option>Indicação</option>
+              <option>Outros</option>
+            </select>
+          </div>
+          <button type="submit">🚀 QUERO MINHA LICENÇA</button>
+        </form>
+
+        <div class="warning" style="margin-top: 1.5rem;">
+          🔒 Seus dados estão seguros. Após o envio, entraremos em contato em até 1 hora com o link de ativação e acesso vitalício ao EA.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- informações de contato do suporte -->
+  <div class="contato">
+    📩 Suporte: <a href="mailto:comodoro91@gmail.com">comodoro91@gmail.com</a> &nbsp;|&nbsp;
+    📲 WhatsApp: <a href="https://wa.me/5541999765210" target="_blank">(41) 99976-5210</a><br>
+    <span style="font-size: 0.7rem;">TRADE WINNER PRO – Execução profissional no MetaTrader 5</span>
+  </div>
+</div>
+</body>
+</html>
