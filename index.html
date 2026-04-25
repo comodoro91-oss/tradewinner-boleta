@@ -675,5 +675,87 @@
     });
 })();
 </script>
+  <!-- ══ SISTEMA DE NOTIFICAÇÃO DE NOVOS CADASTROS ══ -->
+<script>
+// Salva notificação quando cliente se cadastra
+function salvarNotificacao(tipo, nome, whatsapp, email, terminal, chave, plano) {
+    let notificacoes = JSON.parse(localStorage.getItem('twpro_notificacoes') || '[]');
+    notificacoes.unshift({
+        id: Date.now(),
+        tipo: tipo, // 'teste' ou 'comprovante'
+        nome: nome,
+        whatsapp: whatsapp,
+        email: email,
+        terminal: terminal,
+        chave: chave,
+        plano: plano,
+        data: new Date().toISOString(),
+        lida: false
+    });
+    localStorage.setItem('twpro_notificacoes', JSON.stringify(notificacoes));
+    
+    // Atualiza contador no topo
+    atualizarContadorNotificacoes();
+}
+
+// Contador de notificações não lidas
+function atualizarContadorNotificacoes() {
+    let notificacoes = JSON.parse(localStorage.getItem('twpro_notificacoes') || '[]');
+    let naoLidas = notificacoes.filter(n => !n.lida).length;
+    
+    let contador = document.getElementById('notifContador');
+    if (contador) {
+        contador.textContent = naoLidas;
+        contador.style.display = naoLidas > 0 ? 'flex' : 'none';
+    }
+    
+    // Título da página pisca se tiver notificações novas
+    if (naoLidas > 0) {
+        document.title = `(${naoLidas}) 🔔 Novo cadastro! - TRADE WINNER PRO`;
+        setTimeout(() => {
+            document.title = 'TRADE WINNER PRO · Boleta inteligente MT5';
+        }, 3000);
+    }
+}
+
+// ⭐ INTERCEPTA OS DOIS FORMULÁRIOS ⭐
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Formulário de TESTE GRÁTIS
+    const formTeste = document.getElementById('formTeste');
+    if (formTeste) {
+        formTeste.addEventListener('submit', function(e) {
+            let nome = document.getElementById('testeNome').value;
+            let whatsapp = document.getElementById('testeWhats').value;
+            let email = document.getElementById('testeEmail').value;
+            let terminal = document.getElementById('testeTerminal').value;
+            
+            // Salva notificação
+            salvarNotificacao('teste', nome, whatsapp, email, terminal, 'Pendente', 'LATÃO 7 dias');
+        });
+    }
+    
+    // Formulário de COMPROVANTE
+    const formComprovante = document.querySelector('#cadastro-comprovante form');
+    if (formComprovante) {
+        formComprovante.addEventListener('submit', function(e) {
+            let nome = formComprovante.querySelector('input[name="nome"]').value;
+            let whatsapp = formComprovante.querySelector('input[name="whatsapp"]').value;
+            let email = formComprovante.querySelector('input[name="email"]').value;
+            let terminal = formComprovante.querySelector('input[name="terminal_id"]').value;
+            let plano = formComprovante.querySelector('select[name="plano"]').value;
+            
+            // Salva notificação
+            salvarNotificacao('comprovante', nome, whatsapp, email, terminal, 'Aguardando', plano);
+        });
+    }
+    
+    // Inicializa contador
+    atualizarContadorNotificacoes();
+    
+    // Verifica a cada 30 segundos
+    setInterval(atualizarContadorNotificacoes, 30000);
+});
+</script>
 </body>
 </html>
