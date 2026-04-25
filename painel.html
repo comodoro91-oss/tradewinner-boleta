@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAINEL DE MONITORAMENTO · TRADE WINNER PRO</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a10;
+      color: #e8e8f0;
+      font-family: 'Courier New', monospace;
+      padding: 1rem;
+      min-height: 100vh;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+      background: #13131a;
+      border: 1px solid #1f1f2a;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .header h1 {
+      font-size: 1.2rem;
+      color: #c9a84c;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .header h1 span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #3ecf8e;
+      animation: blink 1.5s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: #13131a;
+      border: 1px solid #1f1f2a;
+      border-radius: 10px;
+      padding: 1.2rem;
+      color: #8888a8;
+    }
+    .card .valor {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #e8c96a;
+    }
+    .card .label {
+      font-size: .7rem;
+      margin-top: .3rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .table-wrap {
+      background: #13131a;
+      border: 1px solid #1f1f2a;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1rem;
+      overflow-x: auto;
+    }
+    h2 {
+      color: #c9a84c;
+      font-size: .9rem;
+      margin-bottom: .8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .75rem;
+    }
+    th {
+      text-align: left;
+      color: #555570;
+      padding: .5rem;
+      border-bottom: 1px solid #1f1f2a;
+      font-weight: normal;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    td {
+      padding: .5rem;
+      border-bottom: 1px solid #1a1a22;
+      color: #8888a8;
+    }
+    .badge {
+      padding: .2rem .5rem;
+      border-radius: 4px;
+      font-size: .65rem;
+      font-weight: bold;
+    }
+    .badge.online { background: rgba(62,207,142,.15); color: #3ecf8e; }
+    .badge.offline { background: rgba(224,82,96,.15); color: #e05260; }
+    .badge.teste { background: rgba(201,168,76,.15); color: #e8c96a; }
+    .badge.comp { background: rgba(106,90,205,.15); color: #7B6ED8; }
+    .refresh {
+      font-size: .65rem;
+      color: #555570;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span></span> PAINEL DE MONITORAMENTO</h1>
+  <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+    <div class="refresh" id="ultima-att">Atualizado: --</div>
+    <button onclick="location.reload()" style="background:#c9a84c; color:#000; border:none; padding:.4rem 1rem; border-radius:5px; cursor:pointer; font-weight:bold; font-family:'Courier New';">🔄 ATUALIZAR</button>
+  </div>
+</div>
+
+<div class="cards">
+  <div class="card">
+    <div class="valor" id="online-agora">0</div>
+    <div class="label">👥 ONLINE AGORA</div>
+  </div>
+  <div class="card">
+    <div class="valor" id="total-hoje">0</div>
+    <div class="label">📊 VISITAS HOJE</div>
+  </div>
+  <div class="card">
+    <div class="valor" id="form-testes">0</div>
+    <div class="label">🎯 TESTES GRÁTIS</div>
+  </div>
+  <div class="card">
+    <div class="valor" id="form-comp">0</div>
+    <div class="label">📩 COMPROVANTES</div>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <h2>📍 VISITANTES EM TEMPO REAL</h2>
+  <table>
+    <thead>
+      <tr><th>Status</th><th>IP</th><th>Localização</th><th>Entrada</th><th>Tempo</th><th>Páginas</th></tr>
+    </thead>
+    <tbody id="tabela-visitantes">
+      <tr><td colspan="6" style="text-align:center;color:#555570;">Nenhum visitante no momento</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="table-wrap" style="margin-top:1rem;">
+  <h2>📩 ÚLTIMOS FORMULÁRIOS ENVIADOS</h2>
+  <table>
+    <thead>
+      <tr><th>Tipo</th><th>Nome</th><th>WhatsApp</th><th>Plano</th><th>Horário</th></tr>
+    </thead>
+    <tbody id="tabela-formularios">
+      <tr><td colspan="5" style="text-align:center;color:#555570;">Nenhum formulário ainda</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  // ═══════════════════════════════════
+  // SIMULAÇÃO DE DADOS EM TEMPO REAL
+  // ═══════════════════════════════════
+  
+  // Simula visitantes online
+  const cidades = ['São Paulo, SP', 'Rio de Janeiro, RJ', 'Belo Horizonte, MG', 'Curitiba, PR', 'Porto Alegre, RS', 'Brasília, DF', 'Salvador, BA', 'Fortaleza, CE', 'Manaus, AM', 'Florianópolis, SC'];
+  const ips = [];
+  
+  function gerarIP() {
+    return `${Math.floor(Math.random()*223)+1}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}`;
+  }
+  
+  function atualizarPainel() {
+    // Simula visitantes online (3 a 15)
+    const online = Math.floor(Math.random() * 13) + 3;
+    document.getElementById('online-agora').textContent = online;
+    
+    // Simula visitas hoje
+    document.getElementById('total-hoje').textContent = Math.floor(Math.random() * 80) + 20;
+    
+    // Simula formulários (dados mock)
+    document.getElementById('form-testes').textContent = Math.floor(Math.random() * 8) + 1;
+    document.getElementById('form-comp').textContent = Math.floor(Math.random() * 4);
+    
+    // Tabela de visitantes
+    const tbody = document.getElementById('tabela-visitantes');
+    let html = '';
+    for (let i = 0; i < online; i++) {
+      const ip = gerarIP();
+      const cidade = cidades[Math.floor(Math.random() * cidades.length)];
+      const mins = Math.floor(Math.random() * 45) + 1;
+      const hora = new Date(Date.now() - mins * 60000).toLocaleTimeString('pt-BR');
+      const paginas = Math.floor(Math.random() * 4) + 1;
+      const status = mins < 15 ? 'online' : 'offline';
+      html += `<tr>
+        <td><span class="badge ${status}">${status === 'online' ? '🟢 ONLINE' : '⚫ SAIU'}</span></td>
+        <td>${ip}</td>
+        <td>${cidade}</td>
+        <td>${hora}</td>
+        <td>${mins} min</td>
+        <td>${paginas}</td>
+      </tr>`;
+    }
+    tbody.innerHTML = html || '<tr><td colspan="6" style="text-align:center;color:#555570;">Nenhum visitante</td></tr>';
+    
+    // Tabela de formulários (dados mock)
+    const nomes = ['João Silva', 'Maria Santos', 'Pedro Costa', 'Ana Oliveira', 'Lucas Pereira', 'Carla Souza'];
+    const planos = ['BRONZE', 'PRATA', 'OURO', 'DIAMANTE', 'ELITE'];
+    const tbodyForms = document.getElementById('tabela-formularios');
+    let formsHtml = '';
+    const totalForms = Math.floor(Math.random() * 5) + 2;
+    for (let i = 0; i < totalForms; i++) {
+      const tipo = Math.random() > 0.5 ? 'teste' : 'comp';
+      const nome = nomes[Math.floor(Math.random() * nomes.length)];
+      const whatsapp = `(41) 9${Math.floor(Math.random()*9000)+1000}-${Math.floor(Math.random()*9000)+1000}`;
+      const plano = planos[Math.floor(Math.random() * planos.length)];
+      const hora = new Date(Date.now() - Math.floor(Math.random()*3600000)*3).toLocaleTimeString('pt-BR');
+      formsHtml += `<tr>
+        <td><span class="badge ${tipo}">${tipo === 'teste' ? '🎯 TESTE' : '📩 COMPROVANTE'}</span></td>
+        <td>${nome}</td>
+        <td>${whatsapp}</td>
+        <td>${tipo === 'comp' ? plano : '-'}</td>
+        <td>${hora}</td>
+      </tr>`;
+    }
+    tbodyForms.innerHTML = formsHtml || '<tr><td colspan="5" style="text-align:center;color:#555570;">Nenhum formulário</td></tr>';
+    
+    document.getElementById('ultima-att').textContent = 'Atualizado: ' + new Date().toLocaleTimeString('pt-BR');
+  }
+  
+  atualizarPainel();
+  setInterval(atualizarPainel, 15000); // Atualiza a cada 15 segundos
+</script>
+</body>
+</html>
