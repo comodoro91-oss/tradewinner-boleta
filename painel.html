@@ -37,43 +37,12 @@
       font-size: 16px;
       line-height: 1.6;
       overflow-x: hidden;
-      position: relative;
       min-height: 100vh;
     }
 
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: rgba(9, 9, 13, 0.88);
-      backdrop-filter: blur(2px);
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.04;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .grid-overlay {
-      position: fixed;
-      inset: 0;
-      background-image: linear-gradient(rgba(201,168,76,0.05) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(201,168,76,0.05) 1px, transparent 1px);
-      background-size: 80px 80px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    section, nav, .container, footer {
+    nav, .main-container, footer {
       position: relative;
-      z-index: 2;
+      z-index: 10;
     }
 
     /* ── NAV ── */
@@ -207,12 +176,13 @@
 
     /* ── CARDS ── */
     .card {
-      background: var(--surface);
+      background: rgba(19, 19, 26, 0.95);
       border: 1px solid var(--border2);
       border-radius: 16px;
       padding: 2rem 1.8rem;
       margin-bottom: 1.5rem;
       transition: border-color .2s;
+      backdrop-filter: blur(8px);
     }
 
     .card:hover {
@@ -269,7 +239,7 @@
     }
 
     .plano-card {
-      background: var(--bg);
+      background: rgba(13, 13, 20, 0.9);
       padding: 1rem .5rem;
       border-radius: 10px;
       text-align: center;
@@ -277,6 +247,7 @@
       border: 2px solid var(--border);
       transition: all 0.2s;
       user-select: none;
+      backdrop-filter: blur(4px);
     }
 
     .plano-card:hover {
@@ -286,7 +257,7 @@
 
     .plano-card.active {
       border-color: var(--gold);
-      background: rgba(201,168,76,0.08);
+      background: rgba(201,168,76,0.15);
       box-shadow: 0 0 15px rgba(201,168,76,0.15);
     }
 
@@ -346,7 +317,7 @@
     }
 
     .fg input, .fg select {
-      background: var(--bg);
+      background: rgba(9, 9, 13, 0.8);
       border: 1px solid var(--border2);
       border-radius: 8px;
       color: var(--text);
@@ -434,8 +405,6 @@
       transition: all .2s;
       cursor: pointer;
       font-family: 'DM Sans', sans-serif;
-      width: 100%;
-      justify-content: center;
     }
 
     .btn-ghost:hover {
@@ -444,26 +413,10 @@
       background: rgba(201,168,76,.05);
     }
 
-    .btn-green {
-      background: var(--green);
-      color: #09090d;
-      font-weight: 700;
-    }
-
-    .btn-green:hover {
-      background: #4edfa0;
-      box-shadow: 0 4px 15px rgba(62,207,142,0.3);
-    }
-
-    .btn-red {
-      background: transparent;
-      border: 1px solid var(--red);
-      color: var(--red);
-    }
-
-    .btn-red:hover {
-      background: rgba(224,82,96,0.1);
-      border-color: var(--red);
+    .btn-ghost.active {
+      border-color: var(--gold);
+      color: var(--gold2);
+      background: rgba(201,168,76,0.1);
     }
 
     /* ── CHAVE GERADA ── */
@@ -544,7 +497,7 @@
       font-size: 0.65rem;
       text-transform: uppercase;
       letter-spacing: 1px;
-      background: var(--surface);
+      background: rgba(19, 19, 26, 0.95);
       border-bottom: 2px solid var(--gold);
       font-family: 'DM Mono', monospace;
       position: sticky;
@@ -648,7 +601,7 @@
     }
 
     .status-card {
-      background: var(--surface);
+      background: rgba(19, 19, 26, 0.9);
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 1rem .8rem;
@@ -664,7 +617,7 @@
 
     .status-card.active {
       border-color: var(--gold);
-      background: rgba(201,168,76,0.06);
+      background: rgba(201,168,76,0.1);
     }
 
     .status-number {
@@ -688,7 +641,7 @@
 
     /* ── FINANCE BOX ── */
     .finance-box {
-      background: var(--surface);
+      background: rgba(19, 19, 26, 0.9);
       border: 1px solid var(--border2);
       border-left: 4px solid var(--gold);
       border-radius: 12px;
@@ -706,7 +659,7 @@
 
     /* ── BUSCA ── */
     .busca-input {
-      background: var(--bg);
+      background: rgba(9, 9, 13, 0.8);
       border: 1px solid var(--border2);
       border-radius: 8px;
       color: var(--text);
@@ -723,44 +676,42 @@
       border-color: var(--gold);
     }
 
-    /* ── MODAL ── */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(4px);
-      z-index: 200;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 201;
-      width: 90%;
-      max-width: 600px;
-      max-height: 80vh;
-      overflow-y: auto;
-      background: var(--surface);
+    input[type="date"] {
+      background: rgba(9, 9, 13, 0.8);
       border: 1px solid var(--border2);
-      border-radius: 16px;
-      padding: 2rem;
+      border-radius: 8px;
+      color: var(--text);
+      padding: .6rem .9rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem;
+      width: 100%;
     }
 
-    .modal-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      color: var(--gold2);
+    input[type="date"]:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    input[type="password"] {
+      background: rgba(9, 9, 13, 0.8);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      color: var(--text);
+      padding: .65rem .9rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .9rem;
+      width: 100%;
+    }
+
+    input[type="password"]:focus {
+      outline: none;
+      border-color: var(--gold);
     }
 
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
-      background: #0a0a10;
+      background: rgba(10, 10, 16, 0.95);
       padding: 2rem clamp(1.5rem,6vw,5rem) 1rem;
       text-align: center;
       margin-top: 3rem;
@@ -791,8 +742,6 @@
   </style>
 </head>
 <body>
-<div class="grid-overlay"></div>
-
 <!-- ══ NAV ══ -->
 <nav>
   <div class="nav-logo">
@@ -883,7 +832,7 @@
 
     <div class="data-box">
       <div class="data-box-label">📅 DATA DA COMPRA</div>
-      <input type="date" id="dataCompraInput" style="background: var(--bg); border: 1px solid var(--border2); border-radius: 8px; color: var(--text); padding: .6rem .9rem; font-family: 'DM Sans', sans-serif; font-size: .9rem; width: 100%;">
+      <input type="date" id="dataCompraInput">
     </div>
 
     <div class="fg">
@@ -900,13 +849,14 @@
       <div class="chave-label">🔑 CHAVE GERADA</div>
       <div class="chave-valor" id="chaveGeradaDisplay"></div>
       <span class="badge-plano" id="planoGeradoBadge"></span>
-      <button class="btn-ghost" onclick="copiarChaveGerada()" style="margin-top: .5rem;">
+      <br>
+      <button class="btn-ghost" onclick="copiarChaveGerada()" style="width: auto; display: inline-flex;">
         📋 COPIAR CHAVE
       </button>
     </div>
   </div>
 
-  <!-- ══ CARD: FINANCEIRO ══ -->
+  <!-- ══ FINANCEIRO ══ -->
   <div class="finance-box">
     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .5rem;">
       <span style="font-family: 'DM Mono', monospace; font-size: .7rem; color: var(--gold); letter-spacing: 2px;">💵 LIVRO CAIXA</span>
@@ -921,7 +871,7 @@
     </div>
   </div>
 
-  <!-- ══ CARD: STATUS ══ -->
+  <!-- ══ STATUS ══ -->
   <div class="status-grid">
     <div class="status-card active" id="statusTodos" onclick="setFiltroStatus('todos')">
       <span class="status-number" id="countTodos">0</span>
@@ -941,7 +891,7 @@
     </div>
   </div>
 
-  <!-- ══ CARD: LISTA DE CLIENTES ══ -->
+  <!-- ══ LISTA DE CLIENTES ══ -->
   <div class="card" id="clientes">
     <div class="card-header">
       <span class="card-title">📋 Clientes Cadastrados</span>
@@ -967,20 +917,20 @@
 
 </div>
 
-<!-- ══ MODAL ══ -->
-<div class="modal-overlay" id="modalOverlay" onclick="fecharModal()"></div>
-<div class="modal" id="modalConfig">
-  <div class="modal-title">⚙️ Configurações</div>
-  <p style="color: var(--text2); font-size: .8rem; margin-bottom: 1rem;">Funcionalidade em desenvolvimento</p>
-  <button class="btn-ghost" onclick="fecharModal()">FECHAR</button>
-</div>
-
 <!-- ══ FOOTER ══ -->
 <footer>
   <p>© 2025 TRADE WINNER PRO · Gerador de Chaves · Todos os direitos reservados</p>
 </footer>
 
-<!-- ══ SCRIPTS ══ -->
+<script>
+  // Scroll suave
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  });
+</script>
 <script>
 (function(){
     const SENHA_MESTRA = "TWPRO2025";
@@ -994,7 +944,7 @@
     let valorSelecionado = 199.90;
     let ultimaChaveGerada = '';
 
-    // ⭐ Função de geração de chave IDÊNTICA ao EA MQL5
+    // ⭐ Função de geração de chave
     function gerarHashBase(terminal) {
         let data = terminal + SALT;
         let hash = 0;
@@ -1021,7 +971,6 @@
         return plano + "-" + gerarHashBase(terminal);
     }
 
-    // Carregar dados do localStorage
     function carregarDados() {
         let db = localStorage.getItem('twpro_gerador_db');
         if (db) { try { clientes = JSON.parse(db); } catch(e) { clientes = []; } }
@@ -1084,21 +1033,19 @@
         
         clientes.push({
             id: Date.now()+''+Math.random(),
-            nome, whats, terminal, valor, chave: chave,
+            nome, whats, terminal, valor, chave,
             dataCadastro: hoje.toISOString(), expira: expira.toISOString(),
-            plano: planoSelecionado, dias: diasSelecionados, dataCompra: dataCompra
+            plano: planoSelecionado, dias: diasSelecionados, dataCompra
         });
         
         salvarDados();
         
-        // Mostrar chave gerada
         document.getElementById('chaveGeradaDisplay').textContent = chave;
         let badge = document.getElementById('planoGeradoBadge');
         badge.textContent = planoSelecionado;
         badge.className = 'badge-plano badge-' + planoSelecionado.toLowerCase();
         document.getElementById('chaveGeradaBox').classList.add('show');
         
-        // Limpar campos
         document.getElementById('nomeInput').value = '';
         document.getElementById('whatsInput').value = '';
         document.getElementById('terminalInput').value = '';
@@ -1109,9 +1056,9 @@
     window.copiarChaveGerada = function() {
         if (ultimaChaveGerada) {
             navigator.clipboard.writeText(ultimaChaveGerada).then(() => {
-                alert('✅ Chave copiada para a área de transferência!');
+                alert('✅ Chave copiada!');
             }).catch(() => {
-                alert('⚠️ Não foi possível copiar. Chave: ' + ultimaChaveGerada);
+                alert('⚠️ Chave: ' + ultimaChaveGerada);
             });
         }
     };
@@ -1175,8 +1122,7 @@
                 <td style="color:var(--green); font-family: 'DM Mono', monospace;">R$ ${c.valor.toFixed(2)}</td>
                 <td>
                     <div class="action-btns">
-                        <button class="btn-icon btn-icon-chave" onclick="enviarWhatsApp('${c.id}','chave')" title="Enviar Chave">🔑</button>
-                        <button class="btn-icon btn-icon-whats" onclick="enviarWhatsApp('${c.id}','whats')" title="WhatsApp">📱</button>
+                        <button class="btn-icon btn-icon-chave" onclick="enviarWhatsApp('${c.id}')" title="Enviar Chave">🔑</button>
                         <button class="btn-icon btn-icon-delete" onclick="removerCliente('${c.id}')" title="Remover">🗑️</button>
                     </div>
                 </td>
@@ -1184,7 +1130,7 @@
         }).join('');
     };
 
-    window.enviarWhatsApp = function(clienteId, tipo) {
+    window.enviarWhatsApp = function(clienteId) {
         let cliente = clientes.find(c => c.id == clienteId);
         if (!cliente) return;
         let num = cliente.whats.replace(/\D/g, '');
@@ -1197,7 +1143,7 @@
     };
 
     window.removerCliente = function(id) {
-        if (!confirm('🗑️ Tem certeza que deseja remover este cliente?')) return;
+        if (!confirm('🗑️ Remover este cliente?')) return;
         clientes = clientes.filter(c => c.id != id);
         salvarDados();
         renderizarTudo();
@@ -1237,39 +1183,21 @@
     window.setFiltroStatus = function(filtro) {
         filtroStatus = filtro;
         document.querySelectorAll('.status-card').forEach(c => c.classList.remove('active'));
-        document.getElementById('status' + filtro.charAt(0).toUpperCase() + filtro.slice(1)).classList.add('active');
+        const idMap = { todos: 'statusTodos', ativos: 'statusAtivos', vencendo: 'statusVencendo', vencidos: 'statusVencidos' };
+        document.getElementById(idMap[filtro]).classList.add('active');
         renderizarTabela();
     };
 
     window.setPeriodo = function(periodo) {
         periodoAtual = periodo;
-        document.querySelectorAll('#periodoTudo, #periodoHoje, #periodoMes, #periodoAno').forEach(b => b.classList.remove('active'));
+        ['periodoTudo','periodoHoje','periodoMes','periodoAno'].forEach(id => {
+            document.getElementById(id).classList.remove('active');
+        });
         document.getElementById('periodo' + periodo.charAt(0).toUpperCase() + periodo.slice(1)).classList.add('active');
-        let label = periodo === 'tudo' ? 'Tudo' : periodo === 'hoje' ? 'Hoje' : periodo === 'mes' ? 'Mês' : 'Ano';
-        document.getElementById('periodoAtivoLabel').textContent = label;
+        document.getElementById('periodoAtivoLabel').textContent = 
+            periodo === 'tudo' ? 'Tudo' : periodo === 'hoje' ? 'Hoje' : periodo === 'mes' ? 'Mês' : 'Ano';
         calcularFaturamento();
     };
-
-    window.abrirModal = function() {
-        document.getElementById('modalConfig').style.display = 'block';
-        document.getElementById('modalOverlay').style.display = 'block';
-    };
-
-    window.fecharModal = function() {
-        document.getElementById('modalConfig').style.display = 'none';
-        document.getElementById('modalOverlay').style.display = 'none';
-    };
-
-    // Smooth scroll para links internos
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', e => {
-            const t = document.querySelector(a.getAttribute('href'));
-            if (t) {
-                e.preventDefault();
-                t.scrollIntoView({behavior:'smooth', block:'start'});
-            }
-        });
-    });
 
     carregarDados();
 })();
