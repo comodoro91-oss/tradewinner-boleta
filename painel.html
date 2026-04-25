@@ -132,7 +132,7 @@
       padding: 0 clamp(1rem, 3vw, 2rem);
     }
 
-    /* ── HEADER DA PÁGINA ── */
+    /* ── HEADER ── */
     .page-header {
       text-align: center;
       margin-bottom: 2.5rem;
@@ -181,12 +181,7 @@
       border-radius: 16px;
       padding: 2rem 1.8rem;
       margin-bottom: 1.5rem;
-      transition: border-color .2s;
       backdrop-filter: blur(8px);
-    }
-
-    .card:hover {
-      border-color: rgba(201,168,76,0.3);
     }
 
     .card-header {
@@ -207,17 +202,7 @@
       gap: .5rem;
     }
 
-    .card-badge {
-      font-family: 'DM Mono', monospace;
-      font-size: .6rem;
-      padding: .2rem .6rem;
-      border-radius: 4px;
-      background: rgba(62,207,142,.1);
-      color: var(--green);
-      border: 1px solid rgba(62,207,142,.15);
-    }
-
-    /* ── PLANOS GRID ── */
+    /* ── PLANOS ── */
     .planos-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -225,71 +210,50 @@
       margin-bottom: 1.5rem;
     }
 
-    @media (max-width: 768px) {
-      .planos-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    @media (max-width: 480px) {
-      .planos-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 6px;
-      }
-    }
+    @media (max-width: 768px) { .planos-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 480px) { .planos-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; } }
 
     .plano-card {
-      background: rgba(13, 13, 20, 0.9);
+      background: transparent;
       padding: 1rem .5rem;
       border-radius: 10px;
       text-align: center;
       cursor: pointer;
-      border: 2px solid var(--border);
+      border: 1px solid var(--border);
       transition: all 0.2s;
       user-select: none;
-      backdrop-filter: blur(4px);
     }
 
     .plano-card:hover {
       border-color: rgba(201,168,76,0.4);
-      transform: translateY(-2px);
+      background: rgba(201,168,76,0.05);
     }
 
     .plano-card.active {
       border-color: var(--gold);
-      background: rgba(201,168,76,0.15);
-      box-shadow: 0 0 15px rgba(201,168,76,0.15);
+      background: rgba(201,168,76,0.1);
     }
 
     .plano-icone { font-size: 1.6rem; margin-bottom: 4px; }
-    .plano-nome { 
-      font-weight: 700; 
-      font-size: 0.7rem; 
-      text-transform: uppercase; 
-      letter-spacing: 1px;
-    }
-    .plano-dias { 
-      font-size: 0.85rem; 
-      font-weight: 500; 
-      color: var(--text);
-      margin: 2px 0;
-    }
-    .plano-valor { 
-      font-size: 0.75rem; 
-      font-weight: 600;
-      font-family: 'DM Mono', monospace;
-    }
+    .plano-nome { font-weight: 700; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; }
+    .plano-dias { font-size: 0.85rem; font-weight: 500; color: var(--text); margin: 2px 0; }
+    .plano-valor { font-size: 0.75rem; font-weight: 600; font-family: 'DM Mono', monospace; }
 
-    .plano-bronze .plano-nome { color: #cd7f32; }
-    .plano-bronze .plano-valor { color: #cd7f32; }
-    .plano-prata .plano-nome { color: #c0c0c0; }
-    .plano-prata .plano-valor { color: #c0c0c0; }
-    .plano-ouro .plano-nome { color: var(--gold2); }
-    .plano-ouro .plano-valor { color: var(--gold2); }
-    .plano-diamante .plano-nome { color: #b9f2ff; }
-    .plano-diamante .plano-valor { color: #b9f2ff; }
-    .plano-elite .plano-nome { color: var(--green); }
-    .plano-elite .plano-valor { color: var(--green); }
+    /* Cores por plano - iguais aos botões do site */
+    .plano-bronze .plano-nome, .plano-bronze .plano-valor { color: #8B6914; }
+    .plano-bronze.active { border-color: #8B6914; background: rgba(139,105,20,0.1); }
+    
+    .plano-prata .plano-nome, .plano-prata .plano-valor { color: #7D8794; }
+    .plano-prata.active { border-color: #7D8794; background: rgba(125,135,148,0.1); }
+    
+    .plano-ouro .plano-nome, .plano-ouro .plano-valor { color: #DAA520; }
+    .plano-ouro.active { border-color: #DAA520; background: rgba(218,165,32,0.1); }
+    
+    .plano-diamante .plano-nome, .plano-diamante .plano-valor { color: #6A5ACD; }
+    .plano-diamante.active { border-color: #6A5ACD; background: rgba(106,90,205,0.1); }
+    
+    .plano-elite .plano-nome, .plano-elite .plano-valor { color: #C0392B; }
+    .plano-elite.active { border-color: #C0392B; background: rgba(192,57,43,0.1); }
 
     /* ── FORMULÁRIO ── */
     .form-row {
@@ -299,9 +263,7 @@
       margin-bottom: .8rem;
     }
 
-    @media (max-width: 560px) {
-      .form-row { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 560px) { .form-row { grid-template-columns: 1fr; } }
 
     .fg {
       display: flex;
@@ -316,7 +278,7 @@
       color: var(--text2);
     }
 
-    .fg input, .fg select {
+    .fg input, .fg select, .fg textarea {
       background: rgba(9, 9, 13, 0.8);
       border: 1px solid var(--border2);
       border-radius: 8px;
@@ -328,14 +290,13 @@
       transition: border-color .2s;
     }
 
-    .fg input:focus, .fg select:focus {
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
       outline: none;
       border-color: var(--gold);
     }
 
-    .fg input::placeholder {
-      color: #555;
-    }
+    .fg input::placeholder { color: #555; }
+    .fg textarea { resize: vertical; min-height: 80px; }
 
     .input-group {
       display: grid;
@@ -343,9 +304,7 @@
       gap: .8rem;
     }
 
-    @media (max-width: 560px) {
-      .input-group { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 560px) { .input-group { grid-template-columns: 1fr; } }
 
     .data-box {
       background: rgba(201,168,76,0.04);
@@ -419,6 +378,45 @@
       background: rgba(201,168,76,0.1);
     }
 
+    /* Botões WhatsApp */
+    .btn-whats-chave {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+    }
+    .btn-whats-chave:hover {
+      background: rgba(201,168,76,0.15);
+      border-color: var(--gold2);
+      color: var(--gold2);
+    }
+
+    .btn-whats-cobranca {
+      background: transparent;
+      border: 1px solid #25d366;
+      color: #25d366;
+    }
+    .btn-whats-cobranca:hover {
+      background: rgba(37,211,102,0.15);
+    }
+
+    .btn-whats-teste {
+      background: transparent;
+      border: 1px solid #3498db;
+      color: #3498db;
+    }
+    .btn-whats-teste:hover {
+      background: rgba(52,152,219,0.15);
+    }
+
+    .btn-whats-outro {
+      background: transparent;
+      border: 1px solid #9b59b6;
+      color: #9b59b6;
+    }
+    .btn-whats-outro:hover {
+      background: rgba(155,89,182,0.15);
+    }
+
     /* ── CHAVE GERADA ── */
     .chave-box {
       background: rgba(201,168,76,0.06);
@@ -474,7 +472,7 @@
     .badge-prata { background: #7D8794; color: #FFFFFF; }
     .badge-ouro { background: #DAA520; color: #1a1a1a; }
     .badge-diamante { background: #6A5ACD; color: #FFFFFF; }
-    .badge-elite { background: var(--green); color: #09090d; }
+    .badge-elite { background: #C0392B; color: #FFFFFF; }
 
     /* ── TABELA ── */
     .table-wrapper {
@@ -511,19 +509,10 @@
       vertical-align: middle;
     }
 
-    tr:hover td {
-      background: rgba(201,168,76,0.03);
-    }
+    tr:hover td { background: rgba(201,168,76,0.03); }
 
-    .client-name {
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .client-detail {
-      font-size: 0.68rem;
-      color: var(--text2);
-    }
+    .client-name { font-weight: 600; color: var(--text); }
+    .client-detail { font-size: 0.68rem; color: var(--text2); }
 
     .chave-display {
       background: rgba(201,168,76,0.08);
@@ -554,11 +543,7 @@
     .status-vencendo { background: rgba(201,168,76,0.15); color: var(--gold); }
     .status-vencido { background: rgba(224,82,96,0.15); color: var(--red); }
 
-    .action-btns {
-      display: flex;
-      gap: 4px;
-      flex-wrap: wrap;
-    }
+    .action-btns { display: flex; gap: 4px; flex-wrap: wrap; }
 
     .btn-icon {
       width: 32px;
@@ -567,7 +552,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      text-decoration: none;
       font-size: 0.9rem;
       border: 1px solid transparent;
       cursor: pointer;
@@ -575,10 +559,7 @@
       background: transparent;
     }
 
-    .btn-icon:hover {
-      transform: translateY(-2px);
-    }
-
+    .btn-icon:hover { transform: translateY(-2px); }
     .btn-icon-chave { border-color: var(--gold); color: var(--gold); }
     .btn-icon-chave:hover { background: rgba(201,168,76,0.15); }
     .btn-icon-whats { border-color: #25d366; color: #25d366; }
@@ -594,11 +575,7 @@
       margin-bottom: 1.5rem;
     }
 
-    @media (max-width: 600px) {
-      .status-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
+    @media (max-width: 600px) { .status-grid { grid-template-columns: repeat(2, 1fr); } }
 
     .status-card {
       background: rgba(19, 19, 26, 0.9);
@@ -657,55 +634,89 @@
       margin: .3rem 0;
     }
 
-    /* ── BUSCA ── */
-    .busca-input {
-      background: rgba(9, 9, 13, 0.8);
+    .botoes-whatsapp {
+      display: flex;
+      gap: 8px;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .botoes-whatsapp button {
+      flex: 1;
+      min-width: 100px;
+      padding: .6rem;
+      font-size: .75rem;
+      font-weight: 600;
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 201;
+      width: 90%;
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      background: var(--surface);
       border: 1px solid var(--border2);
-      border-radius: 8px;
-      color: var(--text);
-      padding: .65rem .9rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: .9rem;
-      width: 100%;
-      margin-bottom: 1rem;
-      transition: border-color .2s;
+      border-radius: 16px;
+      padding: 2rem;
     }
 
-    .busca-input:focus {
-      outline: none;
+    .modal-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--gold2);
+    }
+
+    .preco-config-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .preco-config-row label {
+      min-width: 180px;
+      font-size: .85rem;
+    }
+
+    .preco-config-row input {
+      width: 120px;
+    }
+
+    .report-option {
+      background: rgba(13,13,20,0.8);
+      padding: 20px;
+      border-radius: 16px;
+      cursor: pointer;
+      text-align: center;
+      border: 1px solid var(--border);
+      transition: all .2s;
+    }
+
+    .report-option:hover {
       border-color: var(--gold);
+      background: rgba(201,168,76,0.05);
     }
 
-    input[type="date"] {
-      background: rgba(9, 9, 13, 0.8);
-      border: 1px solid var(--border2);
-      border-radius: 8px;
-      color: var(--text);
-      padding: .6rem .9rem;
-      font-family: 'DM Sans', sans-serif;
+    .report-option h4 {
+      margin-top: 10px;
       font-size: .9rem;
-      width: 100%;
-    }
-
-    input[type="date"]:focus {
-      outline: none;
-      border-color: var(--gold);
-    }
-
-    input[type="password"] {
-      background: rgba(9, 9, 13, 0.8);
-      border: 1px solid var(--border2);
-      border-radius: 8px;
-      color: var(--text);
-      padding: .65rem .9rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: .9rem;
-      width: 100%;
-    }
-
-    input[type="password"]:focus {
-      outline: none;
-      border-color: var(--gold);
     }
 
     /* ── FOOTER ── */
@@ -722,6 +733,11 @@
       color: var(--text2);
     }
 
+    hr {
+      margin: 20px 0;
+      border-color: var(--border);
+    }
+
     /* ── RESPONSIVO ── */
     @media (max-width: 600px) {
       nav {
@@ -729,15 +745,10 @@
         height: auto;
         padding: 0.5rem 1rem;
       }
-      .nav-logo {
-        font-size: 0.75rem;
-      }
-      .card {
-        padding: 1.2rem 1rem;
-      }
-      .chave-valor {
-        font-size: 0.85rem;
-      }
+      .nav-logo { font-size: 0.75rem; }
+      .card { padding: 1.2rem 1rem; }
+      .chave-valor { font-size: 0.85rem; }
+      .botoes-whatsapp button { flex: 1 1 45%; min-width: 80px; }
     }
   </style>
 </head>
@@ -770,7 +781,6 @@
   <div class="card">
     <div class="card-header">
       <span class="card-title">🔐 Nova Licença</span>
-      <span class="card-badge">ATIVO</span>
     </div>
 
     <div class="form-row">
@@ -784,10 +794,10 @@
       </div>
     </div>
 
-    <!-- PLANOS -->
+    <!-- PLANOS - Cores iguais aos botões do site -->
     <label style="font-size: .78rem; font-weight: 500; color: var(--text2); margin-bottom: .5rem; display: block;">Plano *</label>
     <div class="planos-grid" id="planosGrid">
-      <div class="plano-card plano-bronze" data-plano="BRONZE" data-dias="30" data-valor="49.90" onclick="selecionarPlano('BRONZE',30,49.90, this)">
+      <div class="plano-card plano-bronze active" data-plano="BRONZE" data-dias="30" data-valor="49.90" onclick="selecionarPlano('BRONZE',30,49.90, this)">
         <div class="plano-icone">🥉</div>
         <div class="plano-nome">Bronze</div>
         <div class="plano-dias">30 dias</div>
@@ -799,7 +809,7 @@
         <div class="plano-dias">90 dias</div>
         <div class="plano-valor">R$ 129,90</div>
       </div>
-      <div class="plano-card plano-ouro active" data-plano="OURO" data-dias="180" data-valor="199.90" onclick="selecionarPlano('OURO',180,199.90, this)">
+      <div class="plano-card plano-ouro" data-plano="OURO" data-dias="180" data-valor="199.90" onclick="selecionarPlano('OURO',180,199.90, this)">
         <div class="plano-icone">🥇</div>
         <div class="plano-nome">Ouro</div>
         <div class="plano-dias">180 dias</div>
@@ -822,7 +832,7 @@
     <div class="input-group">
       <div class="fg">
         <label>Valor Pago (R$)</label>
-        <input type="number" id="valorInput" placeholder="199.90" step="0.01" value="199.90">
+        <input type="number" id="valorInput" placeholder="49.90" step="0.01" value="49.90">
       </div>
       <div class="fg">
         <label>ID Terminal MT5 *</label>
@@ -832,7 +842,7 @@
 
     <div class="data-box">
       <div class="data-box-label">📅 DATA DA COMPRA</div>
-      <input type="date" id="dataCompraInput">
+      <input type="date" id="dataCompraInput" style="background: rgba(9,9,13,0.8); border: 1px solid var(--border2); border-radius: 8px; color: var(--text); padding: .6rem .9rem; font-family: 'DM Sans',sans-serif; font-size: .9rem; width: 100%;">
     </div>
 
     <div class="fg">
@@ -869,6 +879,14 @@
       <button class="btn-ghost" style="width: auto; padding: .4rem 1rem; font-size: .7rem;" id="periodoMes" onclick="setPeriodo('mes')">📆 Mês</button>
       <button class="btn-ghost" style="width: auto; padding: .4rem 1rem; font-size: .7rem;" id="periodoAno" onclick="setPeriodo('ano')">📈 Ano</button>
     </div>
+    
+    <!-- Botões WhatsApp rápidos -->
+    <div class="botoes-whatsapp">
+      <button class="btn-ghost btn-whats-chave" onclick="enviarWhatsAppLivre('entrega')">🔑 ENVIAR CHAVE</button>
+      <button class="btn-ghost btn-whats-cobranca" onclick="enviarWhatsAppLivre('cobranca')">📱 COBRANÇA</button>
+      <button class="btn-ghost btn-whats-teste" onclick="enviarWhatsAppLivre('teste')">🤖 TESTE GRÁTIS</button>
+      <button class="btn-ghost btn-whats-outro" onclick="enviarWhatsAppLivre('outro')">📢 AVISO</button>
+    </div>
   </div>
 
   <!-- ══ STATUS ══ -->
@@ -891,12 +909,24 @@
     </div>
   </div>
 
+  <!-- ══ UTILITÁRIOS ══ -->
+  <div class="card" style="padding: 1.5rem 1.8rem;">
+    <div class="card-header">
+      <span class="card-title">⚙️ Utilitários</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem;">
+      <button class="btn-ghost" onclick="abrirModal('modalMensagens')" style="font-size: .8rem; padding: .6rem;">📝 MENSAGENS</button>
+      <button class="btn-ghost" onclick="abrirModal('modalPrecos')" style="font-size: .8rem; padding: .6rem;">💰 PREÇOS</button>
+      <button class="btn-ghost" onclick="abrirModal('modalRelatorios')" style="font-size: .8rem; padding: .6rem;">📊 RELATÓRIOS</button>
+    </div>
+  </div>
+
   <!-- ══ LISTA DE CLIENTES ══ -->
   <div class="card" id="clientes">
     <div class="card-header">
       <span class="card-title">📋 Clientes Cadastrados</span>
     </div>
-    <input type="text" class="busca-input" id="buscaInput" placeholder="🔍 PESQUISAR CLIENTE" onkeyup="renderizarTabela()">
+    <input type="text" class="fg input" id="buscaInput" placeholder="🔍 PESQUISAR CLIENTE" onkeyup="renderizarTabela()" style="background: rgba(9,9,13,0.8); border: 1px solid var(--border2); border-radius: 8px; color: var(--text); padding: .65rem .9rem; font-family: 'DM Sans', sans-serif; font-size: .9rem; width: 100%; margin-bottom: 1rem;">
     <div class="table-wrapper">
       <table>
         <thead>
@@ -917,11 +947,84 @@
 
 </div>
 
+<!-- ══ MODAIS ══ -->
+<div class="modal-overlay" id="modalOverlay" onclick="fecharModais()"></div>
+
+<!-- Modal Mensagens -->
+<div class="modal" id="modalMensagens">
+  <div class="modal-title">📝 CONFIGURAR MENSAGENS</div>
+  <p style="color: var(--text2); margin-bottom: 15px; font-size: .8rem;">Use {nome}, {chave}, {dias}, {plano}</p>
+  
+  <div class="fg">
+    <label>🔑 Mensagem de Entrega</label>
+    <textarea id="msgEntregaInput" rows="3">🎯 TRADE WINNER PRO - Licença Ativada!
+
+Olá {nome}!
+
+✅ Seu plano {plano} foi ativado!
+🔑 Chave: {chave}
+📅 Válida por: {dias} dias
+
+Suporte: comodoro91@gmail.com</textarea>
+  </div>
+  <div class="fg">
+    <label>📱 Mensagem de Cobrança</label>
+    <textarea id="msgCobrancaInput" rows="2">⚠️ {nome}, sua licença expira em {dias} dias. Renove agora!</textarea>
+  </div>
+  <div class="fg">
+    <label>🤖 Mensagem de Teste Grátis</label>
+    <textarea id="msgTesteInput" rows="2">🎯 {nome}, seu TESTE GRATUITO de 7 dias foi ativado!</textarea>
+  </div>
+  <div class="fg">
+    <label>📢 Mensagem Outros</label>
+    <textarea id="msgOutroInput" rows="2">Olá {nome}! Como posso ajudar?</textarea>
+  </div>
+  <button class="btn-primary" onclick="salvarConfiguracoes()">💾 SALVAR MENSAGENS</button>
+  <button class="btn-ghost" onclick="fecharModais()" style="margin-top: .5rem;">❌ CANCELAR</button>
+</div>
+
+<!-- Modal Preços -->
+<div class="modal" id="modalPrecos">
+  <div class="modal-title">💰 CONFIGURAR VALORES</div>
+  <div class="preco-config-row"><label>🥉 BRONZE (30 dias):</label><span style="color:#8B6914;">R$</span><input type="number" id="precoBronzeInput" step="0.01" value="49.90" style="background: rgba(9,9,13,0.8); border: 1px solid var(--border2); border-radius: 8px; color: var(--text); padding: .5rem; font-family: 'DM Sans',sans-serif;"></div>
+  <div class="preco-config-row"><label>🥈 PRATA (90 dias):</label><span style="color:#7D8794;">R$</span><input type="number" id="precoPrataInput" step="0.01" value="129.90" style="background: rgba(9,9,13,0.8); border: 1px solid var(--border2); border-radius: 8px; color: var(--text); padding: .5rem; font-family: 'DM Sans',sans-serif;"></div>
+  <div class="preco-config-row"><label>🥇 OURO (180 dias):</label><span style="color:#DAA520;">R$</span><input type="number" id="precoOuroInput" step="0.01" value="199.90" style="background: rgba(9,9,13,0.8); border: 1px solid var(--border2); border-radius: 8px; color: var(--text); padding: .5rem; font-family: 'DM Sans',sans-serif;"></div>
+  <div class="preco-config-row"><label>💎 DIAMANTE (270 dias):</label><span style="color:#6A5ACD;">R$</span><input type="number" id="precoDiamanteInput" step="0.01" value="299.90" style="background: rgba(9,9,13,0.8); border: 1px solid var(--border2); border-radius: 8px; color: var(--text); padding: .5rem; font-family: 'DM Sans',sans-serif;"></div>
+  <div class="preco-config-row"><label>👑 ELITE (365 dias):</label><span style="color:#C0392B;">R$</span><input type="number" id="precoEliteInput" step="0.01" value="399.90" style="background: rgba(9,9,13,0.8); border: 1px solid var(--border2); border-radius: 8px; color: var(--text); padding: .5rem; font-family: 'DM Sans',sans-serif;"></div>
+  <button class="btn-primary" onclick="salvarConfiguracoes()">💾 SALVAR VALORES</button>
+  <button class="btn-ghost" onclick="fecharModais()" style="margin-top: .5rem;">❌ CANCELAR</button>
+</div>
+
+<!-- Modal Relatórios -->
+<div class="modal" id="modalRelatorios">
+  <div class="modal-title">📊 GERAR RELATÓRIOS</div>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+    <div class="report-option" onclick="gerarRelatorio('todos')">
+      <div style="font-size:2.5rem;">📋</div>
+      <h4>TODOS OS CLIENTES</h4>
+    </div>
+    <div class="report-option" onclick="gerarRelatorio('ativos')">
+      <div style="font-size:2.5rem;">✅</div>
+      <h4>CLIENTES ATIVOS</h4>
+    </div>
+    <div class="report-option" onclick="gerarRelatorio('vencidos')">
+      <div style="font-size:2.5rem;">⚠️</div>
+      <h4>CLIENTES VENCIDOS</h4>
+    </div>
+    <div class="report-option" onclick="gerarRelatorio('financeiro')">
+      <div style="font-size:2.5rem;">💰</div>
+      <h4>RELATÓRIO FINANCEIRO</h4>
+    </div>
+  </div>
+  <button class="btn-ghost" onclick="fecharModais()" style="margin-top: 1.5rem;">❌ CANCELAR</button>
+</div>
+
 <!-- ══ FOOTER ══ -->
 <footer>
   <p>© 2025 TRADE WINNER PRO · Gerador de Chaves · Todos os direitos reservados</p>
 </footer>
 
+<!-- ══ SCRIPTS ══ -->
 <script>
   // Scroll suave
   document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -937,11 +1040,21 @@
     const SALT = "TWPRO-SALT-2025";
     
     let clientes = [];
+    let config = {
+        mensagens: {
+            entrega: '🎯 TRADE WINNER PRO - Licença Ativada!\n\nOlá {nome}!\n\n✅ Seu plano {plano} foi ativado!\n🔑 Chave: {chave}\n📅 Válida por: {dias} dias\n\nSuporte: comodoro91@gmail.com',
+            cobranca: '⚠️ {nome}, sua licença expira em {dias} dias. Renove agora!',
+            teste: '🎯 {nome}, seu TESTE GRATUITO de 7 dias foi ativado!',
+            outro: 'Olá {nome}! Como posso ajudar?'
+        },
+        precos: { bronze: 49.90, prata: 129.90, ouro: 199.90, diamante: 299.90, elite: 399.90 }
+    };
+    
     let filtroStatus = 'todos';
     let periodoAtual = 'tudo';
-    let planoSelecionado = 'OURO';
-    let diasSelecionados = 180;
-    let valorSelecionado = 199.90;
+    let planoSelecionado = 'BRONZE';
+    let diasSelecionados = 30;
+    let valorSelecionado = 49.90;
     let ultimaChaveGerada = '';
 
     // ⭐ Função de geração de chave
@@ -974,12 +1087,35 @@
     function carregarDados() {
         let db = localStorage.getItem('twpro_gerador_db');
         if (db) { try { clientes = JSON.parse(db); } catch(e) { clientes = []; } }
+        let cfg = localStorage.getItem('twpro_gerador_cfg');
+        if (cfg) { try { const saved = JSON.parse(cfg); config = { ...config, ...saved }; } catch(e) {} }
+        carregarInputsConfig();
+        atualizarValoresPlanos();
         preencherDataHoje();
         renderizarTudo();
     }
 
-    function salvarDados() {
-        localStorage.setItem('twpro_gerador_db', JSON.stringify(clientes));
+    function salvarDados() { localStorage.setItem('twpro_gerador_db', JSON.stringify(clientes)); }
+    function salvarConfig() { localStorage.setItem('twpro_gerador_cfg', JSON.stringify(config)); }
+
+    function carregarInputsConfig() {
+        document.getElementById('msgEntregaInput').value = config.mensagens.entrega;
+        document.getElementById('msgCobrancaInput').value = config.mensagens.cobranca;
+        document.getElementById('msgTesteInput').value = config.mensagens.teste;
+        document.getElementById('msgOutroInput').value = config.mensagens.outro;
+        document.getElementById('precoBronzeInput').value = config.precos.bronze;
+        document.getElementById('precoPrataInput').value = config.precos.prata;
+        document.getElementById('precoOuroInput').value = config.precos.ouro;
+        document.getElementById('precoDiamanteInput').value = config.precos.diamante;
+        document.getElementById('precoEliteInput').value = config.precos.elite;
+    }
+
+    function atualizarValoresPlanos() {
+        document.querySelector('.plano-bronze .plano-valor').textContent = 'R$ ' + config.precos.bronze.toFixed(2);
+        document.querySelector('.plano-prata .plano-valor').textContent = 'R$ ' + config.precos.prata.toFixed(2);
+        document.querySelector('.plano-ouro .plano-valor').textContent = 'R$ ' + config.precos.ouro.toFixed(2);
+        document.querySelector('.plano-diamante .plano-valor').textContent = 'R$ ' + config.precos.diamante.toFixed(2);
+        document.querySelector('.plano-elite .plano-valor').textContent = 'R$ ' + config.precos.elite.toFixed(2);
     }
 
     function preencherDataHoje() {
@@ -1063,6 +1199,23 @@
         }
     };
 
+    window.enviarWhatsAppLivre = function(tipo) {
+        let msg = config.mensagens[tipo] || config.mensagens.outro;
+        msg = msg.replace(/{nome}/g, 'Cliente').replace(/{chave}/g, 'XXXX-XXXX-XXXX').replace(/{dias}/g, 'X').replace(/{plano}/g, 'ELITE');
+        window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+    };
+
+    window.enviarWhatsAppCliente = function(clienteId, tipo) {
+        let cliente = clientes.find(c => c.id == clienteId);
+        if (!cliente) return;
+        let num = cliente.whats.replace(/\D/g, '');
+        let expira = new Date(cliente.expira);
+        let dias = Math.max(0, Math.ceil((expira - new Date())/(1000*60*60*24)));
+        let msg = config.mensagens[tipo] || config.mensagens.outro;
+        msg = msg.replace(/{nome}/g, cliente.nome).replace(/{chave}/g, cliente.chave).replace(/{dias}/g, dias).replace(/{plano}/g, cliente.plano);
+        window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`, '_blank');
+    };
+
     function renderizarTudo() {
         renderizarTabela();
         atualizarContadores();
@@ -1077,7 +1230,8 @@
             let match = !busca || 
                        c.nome.toLowerCase().includes(busca) || 
                        c.whats.includes(busca) || 
-                       c.terminal.toLowerCase().includes(busca);
+                       c.terminal.toLowerCase().includes(busca) ||
+                       c.chave.toLowerCase().includes(busca);
             if (!match) return false;
             
             let expira = new Date(c.expira); expira.setHours(0,0,0,0);
@@ -1105,7 +1259,7 @@
             else if (diff === 0) { statusClass = 'status-vencendo'; statusText = 'VENCE HOJE'; }
             else { statusClass = 'status-ativo'; statusText = 'ATIVO'; }
             
-            let badgeClass = 'badge-' + (c.plano || 'OURO').toLowerCase();
+            let badgeClass = 'badge-' + (c.plano || 'BRONZE').toLowerCase();
             
             return `<tr>
                 <td>
@@ -1122,24 +1276,13 @@
                 <td style="color:var(--green); font-family: 'DM Mono', monospace;">R$ ${c.valor.toFixed(2)}</td>
                 <td>
                     <div class="action-btns">
-                        <button class="btn-icon btn-icon-chave" onclick="enviarWhatsApp('${c.id}')" title="Enviar Chave">🔑</button>
+                        <button class="btn-icon btn-icon-chave" onclick="enviarWhatsAppCliente('${c.id}','entrega')" title="Enviar Chave">🔑</button>
+                        <button class="btn-icon btn-icon-whats" onclick="enviarWhatsAppCliente('${c.id}','cobranca')" title="Cobrança">📱</button>
                         <button class="btn-icon btn-icon-delete" onclick="removerCliente('${c.id}')" title="Remover">🗑️</button>
                     </div>
                 </td>
             </tr>`;
         }).join('');
-    };
-
-    window.enviarWhatsApp = function(clienteId) {
-        let cliente = clientes.find(c => c.id == clienteId);
-        if (!cliente) return;
-        let num = cliente.whats.replace(/\D/g, '');
-        let expira = new Date(cliente.expira);
-        let dias = Math.max(0, Math.ceil((expira - new Date())/(1000*60*60*24)));
-        
-        let msg = `🎯 TRADE WINNER PRO - Licença\n\nOlá ${cliente.nome}!\n\n✅ Seu plano ${cliente.plano} está ativo!\n🔑 Chave: ${cliente.chave}\n📅 Válida por: ${dias} dias\n\nSuporte: comodoro91@gmail.com`;
-        
-        window.open(`https://wa.me/${num}?text=${encodeURIComponent(msg)}`, '_blank');
     };
 
     window.removerCliente = function(id) {
@@ -1197,6 +1340,99 @@
         document.getElementById('periodoAtivoLabel').textContent = 
             periodo === 'tudo' ? 'Tudo' : periodo === 'hoje' ? 'Hoje' : periodo === 'mes' ? 'Mês' : 'Ano';
         calcularFaturamento();
+    };
+
+    window.abrirModal = function(id) {
+        if (id === 'modalMensagens' || id === 'modalPrecos') carregarInputsConfig();
+        document.getElementById(id).style.display = 'block';
+        document.getElementById('modalOverlay').style.display = 'block';
+    };
+
+    window.fecharModais = function() {
+        document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+        document.getElementById('modalOverlay').style.display = 'none';
+    };
+
+    window.salvarConfiguracoes = function() {
+        config.mensagens.entrega = document.getElementById('msgEntregaInput').value;
+        config.mensagens.cobranca = document.getElementById('msgCobrancaInput').value;
+        config.mensagens.teste = document.getElementById('msgTesteInput').value;
+        config.mensagens.outro = document.getElementById('msgOutroInput').value;
+        config.precos.bronze = parseFloat(document.getElementById('precoBronzeInput').value) || 49.90;
+        config.precos.prata = parseFloat(document.getElementById('precoPrataInput').value) || 129.90;
+        config.precos.ouro = parseFloat(document.getElementById('precoOuroInput').value) || 199.90;
+        config.precos.diamante = parseFloat(document.getElementById('precoDiamanteInput').value) || 299.90;
+        config.precos.elite = parseFloat(document.getElementById('precoEliteInput').value) || 399.90;
+        salvarConfig();
+        atualizarValoresPlanos();
+        let novoValor = config.precos[planoSelecionado.toLowerCase()];
+        if (novoValor) document.getElementById('valorInput').value = novoValor.toFixed(2);
+        fecharModais();
+        alert('✅ Configurações salvas com sucesso!');
+    };
+
+    window.gerarRelatorio = function(tipo) {
+        fecharModais();
+        let hoje = new Date();
+        let titulo = '', clientesFiltrados = [];
+        
+        clientes.forEach(c => {
+            let expira = new Date(c.expira); expira.setHours(0,0,0,0);
+            let hojeDate = new Date(); hojeDate.setHours(0,0,0,0);
+            let diff = Math.ceil((expira - hojeDate)/(1000*60*60*24));
+            
+            if (tipo === 'todos') clientesFiltrados.push(c);
+            else if (tipo === 'ativos' && diff > 0) clientesFiltrados.push(c);
+            else if (tipo === 'vencidos' && diff < 0) clientesFiltrados.push(c);
+            else if (tipo === 'financeiro') clientesFiltrados.push(c);
+        });
+        
+        if (tipo === 'todos') titulo = 'TODOS OS CLIENTES';
+        else if (tipo === 'ativos') titulo = 'CLIENTES ATIVOS';
+        else if (tipo === 'vencidos') titulo = 'CLIENTES VENCIDOS';
+        else titulo = 'RELATÓRIO FINANCEIRO';
+        
+        let totalClientes = clientesFiltrados.length;
+        let totalFaturamento = clientesFiltrados.reduce((s,c) => s + c.valor, 0);
+        
+        let printWindow = window.open('', '_blank');
+        let html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Relatório - ${titulo}</title>
+            <style>
+                body { font-family: 'Segoe UI', sans-serif; padding: 40px; background: #0a0e17; color: #e0e6f0; }
+                .header { text-align: center; margin-bottom: 30px; }
+                .header h1 { color: #ffd700; }
+                .summary { background: #131b2a; padding: 20px; display: flex; justify-content: space-around; border-radius: 12px; margin-bottom: 30px; }
+                .summary-value { font-size: 28px; font-weight: bold; color: #00c3a0; }
+                table { width: 100%; border-collapse: collapse; }
+                th { background: #1a2538; color: #ffd700; padding: 12px; text-align: left; }
+                td { padding: 10px; border-bottom: 1px solid #253040; }
+                .btn-print { padding: 12px 30px; background: #00c3a0; color: #0a0e17; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; }
+            </style></head><body>
+            <div class="header"><h1>TRADE WINNER PRO</h1><h2>${titulo}</h2></div>
+            <div class="summary">
+                <div><div class="summary-value">${totalClientes}</div><div>Clientes</div></div>
+                <div><div class="summary-value">R$ ${totalFaturamento.toFixed(2)}</div><div>Faturamento</div></div>
+            </div>
+            <table><thead><tr><th>Cliente</th><th>WhatsApp</th><th>Plano</th><th>Chave</th><th>Expira</th><th>Valor</th></tr></thead><tbody>`;
+        
+        clientesFiltrados.forEach(c => {
+            html += `<tr>
+                <td>${c.nome}</td>
+                <td>${c.whats}</td>
+                <td>${c.plano}</td>
+                <td style="font-family: monospace;">${c.chave}</td>
+                <td>${new Date(c.expira).toLocaleDateString('pt-BR')}</td>
+                <td>R$ ${c.valor.toFixed(2)}</td>
+            </tr>`;
+        });
+        
+        html += `</tbody></table>
+            <div style="margin-top:30px; text-align:center;">
+                <button class="btn-print" onclick="window.print()">🖨️ IMPRIMIR</button>
+            </div></body></html>`;
+        
+        printWindow.document.write(html);
+        printWindow.document.close();
     };
 
     carregarDados();
