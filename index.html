@@ -24,59 +24,24 @@
       color: var(--text); font-family: 'DM Sans', sans-serif;
       font-size: 16px; line-height: 1.6; overflow-x: hidden; position: relative;
     }
-    body::before {
-      content: ''; position: fixed; inset: 0;
-      background: rgba(9, 9, 13, 0.82); backdrop-filter: blur(2px);
-      z-index: 0; pointer-events: none;
-    }
-    body::after {
-      content: ''; position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.04; pointer-events: none; z-index: 0;
-    }
-    .grid-overlay {
-      position: fixed; inset: 0;
-      background-image: linear-gradient(rgba(201,168,76,0.05) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(201,168,76,0.05) 1px, transparent 1px);
-      background-size: 80px 80px; pointer-events: none; z-index: 0;
-    }
+    body::before { content: ''; position: fixed; inset: 0; background: rgba(9, 9, 13, 0.82); backdrop-filter: blur(2px); z-index: 0; pointer-events: none; }
+    body::after { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); opacity: 0.04; pointer-events: none; z-index: 0; }
+    .grid-overlay { position: fixed; inset: 0; background-image: linear-gradient(rgba(201,168,76,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.05) 1px, transparent 1px); background-size: 80px 80px; pointer-events: none; z-index: 0; }
     section, nav, .hero, .features, .boleta-sec, .markets, .signup, .ticker-wrap { position: relative; z-index: 2; }
 
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 clamp(1rem, 2vw, 2rem); height: 60px;
-      background: rgba(9, 9, 13, 0.95); backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border); gap: 0.8rem;
-    }
-    .nav-logo {
-      font-family: 'DM Mono', monospace; font-size: 1.8rem; font-weight: 900;
-      color: var(--gold2); letter-spacing: 2px; text-transform: uppercase;
-      display: flex; align-items: center; gap: 7px; white-space: nowrap; flex-shrink: 0;
-    }
-    .nav-logo-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--gold); box-shadow: 0 0 8px var(--gold);
-      animation: blink 2s ease infinite;
-    }
+    nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(1rem, 2vw, 2rem); height: 60px; background: rgba(9, 9, 13, 0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); gap: 0.8rem; }
+    .nav-logo { font-family: 'DM Mono', monospace; font-size: 1.8rem; font-weight: 900; color: var(--gold2); letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 7px; white-space: nowrap; flex-shrink: 0; }
+    .nav-logo-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 8px var(--gold); animation: blink 2s ease infinite; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
     .nav-links { display: flex; align-items: center; gap: 1.2rem; list-style: none; flex-shrink: 0; }
     .nav-links a { font-size: .75rem; font-weight: 500; color: var(--text2); text-decoration: none; letter-spacing: .5px; transition: color .2s; white-space: nowrap; }
     .nav-links a:hover { color: var(--gold2); }
     .planos-row { display: flex; align-items: center; gap: 5px; flex-shrink: 1; overflow-x: auto; scrollbar-width: none; }
     .planos-row::-webkit-scrollbar { display: none; }
-    .btn-plano {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 90px; height: 32px; border-radius: 4px;
-      font-family: 'DM Sans', sans-serif; font-size: .65rem; font-weight: 700;
-      text-decoration: none; letter-spacing: .5px; white-space: nowrap;
-      transition: all .2s; border: none; flex-shrink: 0; cursor: pointer; text-align: center;
-    }
+    .btn-plano { display: inline-flex; align-items: center; justify-content: center; width: 90px; height: 32px; border-radius: 4px; font-family: 'DM Sans', sans-serif; font-size: .65rem; font-weight: 700; text-decoration: none; letter-spacing: .5px; white-space: nowrap; transition: all .2s; border: none; flex-shrink: 0; cursor: pointer; text-align: center; }
     .btn-latao { background: #CD7F32; color: #FFF5E0; } .btn-latao:hover { background: #DE9043; }
-    .btn-bronze { background: #8B6914; color: #FFF5E0; }
-    .btn-prata { background: #7D8794; color: #FFF; }
-    .btn-ouro { background: #DAA520; color: #1a1a1a; }
-    .btn-diamante { background: #6A5ACD; color: #FFF; }
+    .btn-bronze { background: #8B6914; color: #FFF5E0; } .btn-prata { background: #7D8794; color: #FFF; }
+    .btn-ouro { background: #DAA520; color: #1a1a1a; } .btn-diamante { background: #6A5ACD; color: #FFF; }
     .btn-elite { background: #C0392B; color: #FFF; }
     @media (max-width:1050px){ nav{flex-wrap:wrap;height:auto;padding:.4rem 1rem;gap:.3rem} .planos-row{order:3;width:100%;justify-content:center;padding-bottom:.3rem} .btn-plano{width:80px;height:28px;font-size:.6rem} }
     @media (max-width:600px){ .btn-plano{width:65px;height:26px;font-size:.55rem} .nav-logo{font-size:.65rem} .nav-links{gap:.6rem} .nav-links a{font-size:.65rem} }
@@ -108,17 +73,13 @@
     .sec-desc { color: var(--text2); margin-top: .8rem; font-weight: 300; }
 
     .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; max-width: 1100px; margin: 0 auto; }
-    @media(max-width:900px){.features-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:560px){.features-grid{grid-template-columns:1fr}}
-    .feat-card { background: var(--surface); padding: 2rem 1.8rem; }
-    .feat-card:hover { background: #16161f; }
+    @media(max-width:900px){.features-grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:560px){.features-grid{grid-template-columns:1fr}}
+    .feat-card { background: var(--surface); padding: 2rem 1.8rem; } .feat-card:hover { background: #16161f; }
     .feat-icon { width: 40px; height: 40px; border-radius: 8px; background: rgba(201,168,76,.08); border: 1px solid rgba(201,168,76,.12); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; margin-bottom: 1.2rem; }
-    .feat-title { font-size: 1rem; font-weight: 600; margin-bottom: .5rem; }
-    .feat-desc { font-size: .85rem; color: var(--text2); line-height: 1.6; font-weight: 300; }
+    .feat-title { font-size: 1rem; font-weight: 600; margin-bottom: .5rem; } .feat-desc { font-size: .85rem; color: var(--text2); line-height: 1.6; font-weight: 300; }
 
     .markets-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 1100px; margin: 0 auto; }
-    @media(max-width:1000px){.markets-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:560px){.markets-grid{grid-template-columns:1fr}}
+    @media(max-width:1000px){.markets-grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:560px){.markets-grid{grid-template-columns:1fr}}
     .market-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.5rem 1.3rem 1rem; transition: border-color .2s, transform .2s; }
     .market-card:hover { border-color: rgba(201,168,76,.3); transform: translateY(-3px); }
 
@@ -130,8 +91,7 @@
 
     .signup { background: rgba(15,15,21,0.8); }
     .signup-box { max-width: 580px; margin: 0 auto; background: var(--surface); border: 1px solid var(--border2); border-radius: 16px; padding: 2.5rem 2rem; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
-    @media(max-width:560px){.form-row{grid-template-columns:1fr}}
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; } @media(max-width:560px){.form-row{grid-template-columns:1fr}}
     .fg { display: flex; flex-direction: column; gap: .4rem; margin-bottom: .9rem; }
     .fg label { font-size: .78rem; font-weight: 500; color: var(--text2); }
     .fg input, .fg select { background: var(--bg); border: 1px solid var(--border2); border-radius: 8px; color: var(--text); padding: .65rem .9rem; font-family: 'DM Sans', sans-serif; font-size: .9rem; width: 100%; }
@@ -194,10 +154,9 @@
 </section>
 
 <div class="ticker-wrap" style="padding:.4rem 0">
-  <div class="tradingview-widget-container" style="width:100%">
-    <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-container" style="width:100%"><div class="tradingview-widget-container__widget"></div>
     <script src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-    {"symbols":[{"proName":"OANDA:XAUUSD","title":"OURO / XAUUSD"},{"proName":"OANDA:SPX500USD","title":"S&P 500"},{"proName":"OANDA:NAS100USD","title":"NASDAQ 100"},{"proName":"OANDA:US30USD","title":"DOW JONES"},{"proName":"OANDA:EURUSD","title":"EUR/USD"},{"proName":"BITSTAMP:BTCUSD","title":"BITCOIN"}],"showSymbolLogo":false,"colorTheme":"dark","isTransparent":true,"displayMode":"adaptive","locale":"br"}
+    {"symbols":[{"proName":"OANDA:XAUUSD","title":"OURO / XAUUSD"}],"showSymbolLogo":false,"colorTheme":"dark","isTransparent":true,"displayMode":"adaptive","locale":"br"}
     </script>
   </div>
 </div>
@@ -227,16 +186,8 @@
 <section class="sec-pad boleta-sec" id="boleta">
   <div class="boleta-layout">
     <div class="boleta-showcase"><img src="boleta.png" alt="Boleta MT5"></div>
-    <div class="boleta-info">
-      <span class="sec-label">A Boleta</span>
-      <h2 class="boleta-info-title">Interface para velocidade do scalp</h2>
-      <ul class="feature-list">
-        <li><span class="fl-check">✓</span>Lote ajustável com + / –</li>
-        <li><span class="fl-check">✓</span>SL e 3 TPs em pontos</li>
-        <li><span class="fl-check">✓</span>BUY / SELL imediato</li>
-        <li><span class="fl-check">✓</span>Break-even com um clique</li>
-        <li><span class="fl-check">✓</span>Fechamento parcial</li>
-      </ul>
+    <div class="boleta-info"><span class="sec-label">A Boleta</span><h2 class="boleta-info-title">Interface para velocidade do scalp</h2>
+      <ul class="feature-list"><li><span class="fl-check">✓</span>Lote ajustável</li><li><span class="fl-check">✓</span>SL e 3 TPs</li><li><span class="fl-check">✓</span>BUY/SELL</li><li><span class="fl-check">✓</span>Break-even</li><li><span class="fl-check">✓</span>Fechamento parcial</li></ul>
     </div>
   </div>
 </section>
@@ -249,34 +200,25 @@
     <p class="sec-desc">Sem cartão. Sem compromisso. Apenas seus dados para receber a Boleta.</p>
   </div>
   <div class="signup-box">
-    <!-- ⭐ NÃO MEXER: action CORRETO ⭐ -->
-    <form action="https://formspree.io/f/xdaybkjn" method="POST" id="formTeste" onsubmit="return processarTesteGratis(event)">
+    <form action="https://formspree.io/f/xdaybkjn" method="POST" id="formTeste">
       <input type="hidden" name="tipo" value="TESTE_GRATIS_LATAO">
       <div class="form-row">
         <div class="fg"><label>Nome completo *</label><input type="text" name="nome" id="testeNome" required placeholder="Seu nome"></div>
         <div class="fg"><label>WhatsApp (com DDD) *</label><input type="tel" name="whatsapp" id="testeWhats" required placeholder="(41) 99999-9999"></div>
       </div>
       <div class="fg"><label>E-mail *</label><input type="email" name="email" id="testeEmail" required placeholder="seu@email.com"></div>
-      <div class="fg">
-        <label>ID do Terminal MT5 *</label>
-        <input type="text" name="terminal_id" id="testeTerminal" required placeholder="Ex: 12345678 (MT5 → Ajuda → Sobre)">
-      </div>
-      <button type="submit" class="btn-primary" style="width:100%;justify-content:center;border-radius:8px;padding:.9rem;font-size:.95rem">🎯 QUERO TESTAR 7 DIAS GRÁTIS</button>
+      <div class="fg"><label>ID do Terminal MT5 *</label><input type="text" name="terminal_id" id="testeTerminal" required placeholder="Ex: 12345678"></div>
+      <button type="submit" class="btn-primary" id="btnTeste" style="width:100%;justify-content:center;border-radius:8px;padding:.9rem;font-size:.95rem">🎯 QUERO TESTAR 7 DIAS GRÁTIS</button>
     </form>
-    <div class="notice-green" style="margin-top:1rem">✅ Você receberá a chave de teste por email em minutos.</div>
+    <div class="notice-green" style="margin-top:1rem">✅ Você receberá a chave de teste por WhatsApp e email.</div>
     <div class="notice" style="margin-top:.4rem;font-size:.7rem">🔒 Plano LATÃO · 7 dias grátis</div>
   </div>
 </section>
 
 <!-- ══ FORMULÁRIO COMPROVANTE ══ -->
 <section class="sec-pad signup" id="cadastro-comprovante" style="background:rgba(15,15,21,0.9)">
-  <div class="sec-center">
-    <span class="sec-label">Ativação de Licença</span>
-    <h2 class="sec-title">Já fez sua assinatura?</h2>
-    <p class="sec-desc">Envie o comprovante para liberarmos sua licença em minutos.</p>
-  </div>
+  <div class="sec-center"><span class="sec-label">Ativação de Licença</span><h2 class="sec-title">Já fez sua assinatura?</h2><p class="sec-desc">Envie o comprovante para liberarmos sua licença em minutos.</p></div>
   <div class="signup-box">
-    <!-- ⭐ NÃO MEXER: action CORRETO ⭐ -->
     <form action="https://formspree.io/f/mkokykrk" method="POST" id="formComprovante">
       <input type="hidden" name="tipo" value="COMPROVANTE">
       <div class="form-row">
@@ -284,184 +226,134 @@
         <div class="fg"><label>WhatsApp (com DDD) *</label><input type="tel" name="whatsapp" required placeholder="(41) 99999-9999"></div>
       </div>
       <div class="fg"><label>E-mail *</label><input type="email" name="email" required placeholder="seu@email.com"></div>
-      <div class="fg">
-        <label>Plano adquirido *</label>
-        <select name="plano" required>
-          <option value="" disabled selected>Selecione seu plano...</option>
-          <option value="BRONZE">🥉 BRONZE (30 dias)</option>
-          <option value="PRATA">🥈 PRATA (90 dias)</option>
-          <option value="OURO">🥇 OURO (180 dias)</option>
-          <option value="DIAMANTE">💎 DIAMANTE (270 dias)</option>
-          <option value="ELITE">👑 ELITE (365 dias)</option>
-        </select>
-      </div>
+      <div class="fg"><label>Plano adquirido *</label><select name="plano" required><option value="" disabled selected>Selecione...</option><option value="BRONZE">🥉 BRONZE (30d)</option><option value="PRATA">🥈 PRATA (90d)</option><option value="OURO">🥇 OURO (180d)</option><option value="DIAMANTE">💎 DIAMANTE (270d)</option><option value="ELITE">👑 ELITE (365d)</option></select></div>
       <div class="fg"><label>ID do Terminal MT5 *</label><input type="text" name="terminal_id" required placeholder="Ex: 12345678"></div>
-      <div class="fg"><label>📎 Link ou descrição do comprovante</label><input type="text" name="comprovante" placeholder="Cole o link do print ou descreva"></div>
-      <button type="submit" class="btn-primary" style="width:100%;justify-content:center;border-radius:8px;padding:.9rem;font-size:.95rem">📩 ENVIAR COMPROVANTE PARA ATIVAÇÃO</button>
+      <div class="fg"><label>📎 Comprovante</label><input type="text" name="comprovante" placeholder="Link ou descrição"></div>
+      <button type="submit" class="btn-primary" style="width:100%;justify-content:center;border-radius:8px;padding:.9rem;font-size:.95rem">📩 ENVIAR COMPROVANTE</button>
     </form>
-    <div class="notice-green" style="margin-top:1rem">✅ Licença liberada em até 30 minutos após confirmação.</div>
+    <div class="notice-green" style="margin-top:1rem">✅ Licença liberada em até 30 minutos.</div>
   </div>
 </section>
 
-<footer style="border-top:1px solid var(--border);background:#0a0a10;padding:3rem clamp(1.5rem,6vw,5rem) 1.5rem;position:relative;z-index:10">
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2.5rem;max-width:1200px;margin:0 auto 2rem">
-    <div>
-      <div style="font-family:'DM Mono',monospace;font-size:.8rem;color:var(--gold)"><span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--gold);margin-right:8px"></span>TRADE WINNER PRO</div>
-      <p style="font-size:.82rem;color:var(--text2)">Boleta inteligente para MetaTrader 5.</p>
-    </div>
-    <div><h4 style="color:#fff">Links Rápidos</h4><ul style="list-style:none"><li><a href="#funcoes" style="color:var(--text2)">⚡ Funcionalidades</a></li><li><a href="#boleta" style="color:var(--text2)">📊 A Boleta</a></li><li><a href="#cadastro-teste" style="color:var(--text2)">🎯 Teste Grátis</a></li></ul></div>
-    <div><h4 style="color:#fff">Fale Conosco</h4><p style="color:var(--text2)">✉️ comodoro91@gmail.com<br>📲 (41) 99976-5210</p></div>
-  </div>
-  <div style="text-align:center;color:var(--text2);font-size:.7rem">© 2025 TRADE WINNER PRO</div>
+<footer style="border-top:1px solid var(--border);background:#0a0a10;padding:2rem;text-align:center;position:relative;z-index:10">
+  <div style="color:var(--text2);font-size:.7rem">© 2025 TRADE WINNER PRO · Todos os direitos reservados</div>
 </footer>
 
 <script>
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
 </script>
 
-<!-- ⭐ SCRIPT FINAL CORRIGIDO ⭐ -->
+<!-- ⭐⭐⭐ SCRIPT TESTE GRÁTIS - CORRIGIDO ⭐⭐⭐ -->
 <script>
-const SALT="TWPRO-SALT-2025";
-const LINK_EA="https://comodoro91-oss.github.io/tradewinner-boleta/TRADE_WINNER_PRO_V1.1.ex5";
-const LINK_PDF="https://comodoro91-oss.github.io/tradewinner-boleta/Manual_TRADE_WINNER.pdf";
-const SEU_WATS="5541999765210"; // Seu WhatsApp
+(function(){
+    console.log('✅ Script teste grátis carregado!');
+    
+    const SALT="TWPRO-SALT-2025";
+    const LINK_EA="https://comodoro91-oss.github.io/tradewinner-boleta/TRADE_WINNER_PRO_V1.1.ex5";
+    const LINK_PDF="https://comodoro91-oss.github.io/tradewinner-boleta/Manual_TRADE_WINNER.pdf";
+    const SEU_WATS="5541999765210";
 
-function verificarTesteExistente(terminal){
-    let db=localStorage.getItem('twpro_testes_db');
-    let testes=db?JSON.parse(db):{};
-    if(testes[terminal]){
-        let dt=new Date(testes[terminal].dataSolicitacao);
-        let hoje=new Date();
-        let diff=Math.ceil((hoje-dt)/(86400000));
-        if(diff<=7) return {ok:false,msg:'⚠️ Terminal já possui teste ativo! Dias restantes: '+(7-diff)};
-        if(testes[terminal].totalTestes>=2) return {ok:false,msg:'⚠️ Limite de 2 testes atingido!'};
+    function verificarTesteExistente(terminal){
+        let db=localStorage.getItem('twpro_testes_db');
+        let testes=db?JSON.parse(db):{};
+        if(testes[terminal]){
+            let dt=new Date(testes[terminal].dataSolicitacao);
+            let hoje=new Date();
+            let diff=Math.ceil((hoje-dt)/(86400000));
+            if(diff<=7) return {ok:false,msg:'⚠️ Terminal já possui teste ativo! Dias restantes: '+(7-diff)};
+            if(testes[terminal].totalTestes>=2) return {ok:false,msg:'⚠️ Limite de 2 testes atingido!'};
+        }
+        return {ok:true};
     }
-    return {ok:true};
-}
 
-function gerarChaveLatao(terminal){
-    let data=terminal+SALT;let hash=0;
-    for(let i=0;i<data.length;i++){let c=data.charCodeAt(i);hash=((hash<<5)-hash)+c;hash=hash&0x7FFFFFFF}
-    let a=Math.abs(hash),p1=a%10000,p2=Math.floor(a/10000)%10000,p3=Math.floor(a/100000000)%10000;
-    const l="ABCDEFGHJKLMNPQRSTUVWXYZ";
-    return "LATAO-"+l.charAt(p1%l.length)+l.charAt(p2%l.length)+l.charAt(p3%l.length)+"-"+String(p1).padStart(4,'0')+"-"+String(p2%1000).padStart(3,'0')+"-"+String(p3%1000).padStart(3,'0');
-}
+    function gerarChaveLatao(terminal){
+        let data=terminal+SALT;let hash=0;
+        for(let i=0;i<data.length;i++){let c=data.charCodeAt(i);hash=((hash<<5)-hash)+c;hash=hash&0x7FFFFFFF}
+        let a=Math.abs(hash),p1=a%10000,p2=Math.floor(a/10000)%10000,p3=Math.floor(a/100000000)%10000;
+        const l="ABCDEFGHJKLMNPQRSTUVWXYZ";
+        return "LATAO-"+l.charAt(p1%l.length)+l.charAt(p2%l.length)+l.charAt(p3%l.length)+"-"+String(p1).padStart(4,'0')+"-"+String(p2%1000).padStart(3,'0')+"-"+String(p3%1000).padStart(3,'0');
+    }
 
-function processarTesteGratis(event){
-    event.preventDefault();
+    // ⭐ PEGA O FORMULÁRIO PELO ID ⭐
+    var form=document.getElementById('formTeste');
     
-    let nome=document.getElementById('testeNome').value.trim();
-    let whatsapp=document.getElementById('testeWhats').value.trim();
-    let email=document.getElementById('testeEmail').value.trim();
-    let terminal=document.getElementById('testeTerminal').value.trim();
-    
-    if(!nome) return alert('⚠️ Preencha seu Nome!');
-    if(!whatsapp) return alert('⚠️ Preencha seu WhatsApp!');
-    if(!email) return alert('⚠️ Preencha seu E-mail!');
-    if(!terminal) return alert('⚠️ Preencha o ID do Terminal MT5!');
-    
-    let v=verificarTesteExistente(terminal);
-    if(!v.ok) return alert(v.msg);
-    
-    let chave=gerarChaveLatao(terminal);
-    let hoje=new Date();
-    let expira=new Date(hoje);expira.setDate(hoje.getDate()+7);
-    
-    // ⭐ 1. SALVA NO LOCALSTORAGE - GERADOR ⭐
-    let clientes=JSON.parse(localStorage.getItem('twpro_gerador_db')||'[]');
-    clientes.push({
-        id:Date.now()+''+Math.random(),
-        nome:nome,
-        whats:whatsapp,
-        email:email,
-        terminal:terminal,
-        chave:chave,
-        plano:'LATAO',
-        dias:7,
-        valor:0,
-        dataCompra:hoje.toISOString().split('T')[0],
-        dataCadastro:hoje.toISOString(),
-        expira:expira.toISOString(),
-        status:'teste'
-    });
-    localStorage.setItem('twpro_gerador_db',JSON.stringify(clientes));
-    
-    // ⭐ 2. SALVA TESTE (ANTI-ABUSO) ⭐
-    let db=localStorage.getItem('twpro_testes_db');
-    let testes=db?JSON.parse(db):{};
-    if(!testes[terminal]) testes[terminal]={totalTestes:0,historico:[]};
-    testes[terminal].totalTestes++;
-    testes[terminal].dataSolicitacao=new Date().toISOString();
-    testes[terminal].historico.push({data:new Date().toISOString(),chave,nome,whatsapp,email});
-    localStorage.setItem('twpro_testes_db',JSON.stringify(testes));
-    
-    // ⭐ 3. NOTIFICAÇÃO NO PAINEL ⭐
-    let nots=JSON.parse(localStorage.getItem('twpro_notificacoes')||'[]');
-    nots.unshift({
-        id:Date.now(),
-        tipo:'teste',
-        nome:nome,
-        whatsapp:whatsapp,
-        email:email,
-        terminal:terminal,
-        chave:chave,
-        plano:'LATAO 7 dias',
-        data:new Date().toISOString(),
-        lida:false
-    });
-    localStorage.setItem('twpro_notificacoes',JSON.stringify(nots));
-    
-    // ⭐ 4. FORMSPREE - EMAIL PARA VOCÊ + CLIENTE ⭐
-    let form=document.getElementById('formTeste');
-    let fd=new FormData(form);
-    fd.append('chave_gerada',chave);
-    fd.append('link_ea',LINK_EA);
-    fd.append('link_pdf',LINK_PDF);
-    fd.append('plano_ativado','LATAO 7 dias GRÁTIS');
-    
-    fetch(form.action,{
-        method:'POST',
-        body:fd,
-        headers:{'Accept':'application/json'}
-    }).catch(()=>{});
-    
-    // ⭐ 5. WHATSAPP PARA O CLIENTE ⭐
-    let numCliente=whatsapp.replace(/\D/g,'');
-    let msgCliente='🎯 *TRADE WINNER PRO - Teste Ativado!*\n\n'+
-                   'Olá *'+nome+'*!\n\n'+
-                   '✅ Seu teste gratuito LATÃO foi ativado!\n\n'+
-                   '🔰 *Plano:* LATÃO 7 dias GRÁTIS\n'+
-                   '🔑 *Chave:* '+chave+'\n'+
-                   '📅 *Válido até:* '+expira.toLocaleDateString('pt-BR')+'\n\n'+
-                   '📥 *Baixe o EA:*\n'+LINK_EA+'\n\n'+
-                   '📘 *Manual PDF:*\n'+LINK_PDF+'\n\n'+
-                   '⚙️ *Como ativar:*\n'+
-                   '1. Instale o EA no MT5\n'+
-                   '2. No painel, clique em ATIVAR LICENÇA\n'+
-                   '3. Cole a chave acima\n\n'+
-                   '💬 Dúvidas? (41) 99976-5210\n\n'+
-                   'Bons trades! 🚀';
-    
-    window.open('https://wa.me/'+numCliente+'?text='+encodeURIComponent(msgCliente),'_blank');
-    
-    // ⭐ 6. WHATSAPP PARA VOCÊ ⭐
-    let msgProprietario='🔔 *NOVO TESTE GRÁTIS!*\n\n'+
-                        '👤 *'+nome+'*\n'+
-                        '📱 '+whatsapp+'\n'+
-                        '📧 '+email+'\n'+
-                        '🖥️ Terminal: '+terminal+'\n'+
-                        '🔑 Chave: '+chave+'\n'+
-                        '📅 '+hoje.toLocaleString('pt-BR')+'\n'+
-                        '🏷️ LATÃO 7 dias\n\n'+
-                        '✅ Cliente já recebeu WhatsApp!';
-    
-    // Abre WhatsApp para você em uma nova aba
-    window.open('https://wa.me/'+SEU_WATS+'?text='+encodeURIComponent(msgProprietario),'_blank');
-    
-    form.reset();
-    alert('✅ CADASTRO REALIZADO!\n\n🔰 Plano LATÃO - 7 dias GRÁTIS\n\n📱 Abrimos o WhatsApp com sua chave!\n📧 Você também receberá um email.\n\nVerifique seu WhatsApp!');
-    return false;
-}
+    if(form){
+        console.log('✅ Formulário encontrado!');
+        
+        form.addEventListener('submit', function(event){
+            event.preventDefault();
+            console.log('🚀 Processando teste grátis...');
+            
+            let nome=document.getElementById('testeNome').value.trim();
+            let whatsapp=document.getElementById('testeWhats').value.trim();
+            let email=document.getElementById('testeEmail').value.trim();
+            let terminal=document.getElementById('testeTerminal').value.trim();
+            
+            if(!nome){alert('⚠️ Preencha seu Nome!');return;}
+            if(!whatsapp){alert('⚠️ Preencha seu WhatsApp!');return;}
+            if(!email){alert('⚠️ Preencha seu E-mail!');return;}
+            if(!terminal){alert('⚠️ Preencha o ID do Terminal MT5!');return;}
+            
+            let v=verificarTesteExistente(terminal);
+            if(!v.ok){alert(v.msg);return;}
+            
+            let chave=gerarChaveLatao(terminal);
+            let hoje=new Date();
+            let expira=new Date(hoje);expira.setDate(hoje.getDate()+7);
+            
+            console.log('🔑 Chave gerada:',chave);
+            
+            // Salva no gerador
+            let clientes=JSON.parse(localStorage.getItem('twpro_gerador_db')||'[]');
+            clientes.push({
+                id:Date.now()+''+Math.random(),nome,whats:whatsapp,email,terminal,chave,
+                plano:'LATAO',dias:7,valor:0,
+                dataCompra:hoje.toISOString().split('T')[0],
+                dataCadastro:hoje.toISOString(),expira:expira.toISOString(),status:'teste'
+            });
+            localStorage.setItem('twpro_gerador_db',JSON.stringify(clientes));
+            console.log('💾 Salvo no gerador!');
+            
+            // Anti-abuso
+            let db=localStorage.getItem('twpro_testes_db');
+            let testes=db?JSON.parse(db):{};
+            if(!testes[terminal]) testes[terminal]={totalTestes:0,historico:[]};
+            testes[terminal].totalTestes++;
+            testes[terminal].dataSolicitacao=new Date().toISOString();
+            testes[terminal].historico.push({data:new Date().toISOString(),chave,nome,whatsapp,email});
+            localStorage.setItem('twpro_testes_db',JSON.stringify(testes));
+            
+            // Notificação painel
+            let nots=JSON.parse(localStorage.getItem('twpro_notificacoes')||'[]');
+            nots.unshift({id:Date.now(),tipo:'teste',nome,whatsapp,email,terminal,chave,plano:'LATAO 7 dias',data:new Date().toISOString(),lida:false});
+            localStorage.setItem('twpro_notificacoes',JSON.stringify(nots));
+            console.log('🔔 Notificação salva!');
+            
+            // Formspree
+            let fd=new FormData(form);
+            fd.append('chave_gerada',chave);
+            fd.append('link_ea',LINK_EA);
+            fd.append('link_pdf',LINK_PDF);
+            fetch(form.action,{method:'POST',body:fd,headers:{'Accept':'application/json'}}).then(()=>console.log('✅ Formspree OK')).catch(()=>{});
+            
+            // WhatsApp Cliente
+            let numCliente=whatsapp.replace(/\D/g,'');
+            let msgCliente=encodeURIComponent('🎯 *TRADE WINNER PRO - Teste Ativado!*\n\nOlá *'+nome+'*!\n\n✅ Seu teste LATÃO 7 dias foi ativado!\n\n🔑 *Chave:* '+chave+'\n📅 *Válido até:* '+expira.toLocaleDateString('pt-BR')+'\n\n📥 *EA:* '+LINK_EA+'\n📘 *PDF:* '+LINK_PDF+'\n\n⚙️ Abra o EA, clique ATIVAR LICENÇA e cole a chave!\n\n💬 Dúvidas: (41) 99976-5210');
+            window.open('https://wa.me/'+numCliente+'?text='+msgCliente,'_blank');
+            console.log('📱 WhatsApp cliente aberto!');
+            
+            // WhatsApp Proprietário
+            let msgProp=encodeURIComponent('🔔 *NOVO TESTE!*\n\n👤 '+nome+'\n📱 '+whatsapp+'\n📧 '+email+'\n🖥️ '+terminal+'\n🔑 '+chave+'\n📅 '+hoje.toLocaleString('pt-BR'));
+            window.open('https://wa.me/'+SEU_WATS+'?text='+msgProp,'_blank');
+            console.log('📱 WhatsApp proprietário aberto!');
+            
+            form.reset();
+            alert('✅ CADASTRO REALIZADO!\n\n🔰 LATÃO 7 dias GRÁTIS\n\n📱 WhatsApp com chave aberto!\n📧 Email enviado!\n\nVerifique seu WhatsApp!');
+        });
+    } else {
+        console.log('❌ Formulário NÃO encontrado!');
+    }
+})();
 </script>
 </body>
 </html>
