@@ -319,13 +319,13 @@
 document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}})});
 </script>
 
-<!-- ⭐ SCRIPT FINAL - COM NOTIFICAÇÃO PARA PROPRIETÁRIO ⭐ -->
+<!-- ⭐ SCRIPT FINAL - ENVIO WHATSAPP + EMAIL ⭐ -->
 <script>
 const SALT="TWPRO-SALT-2025";
 const LINK_EA="https://comodoro91-oss.github.io/tradewinner-boleta/TRADE_WINNER_PRO_V1.1.ex5";
 const LINK_PDF="https://comodoro91-oss.github.io/tradewinner-boleta/Manual_TRADE_WINNER.pdf";
-const SEU_EMAIL="comodoro91@gmail.com"; // ⭐ SEU EMAIL
-const SEU_WATS="5541999765210"; // ⭐ SEU WHATSAPP (com código do país)
+const SEU_EMAIL="comodoro91@gmail.com";
+const SEU_WATS="5541999765210"; // Seu WhatsApp para receber notificações
 
 function verificarTesteExistente(terminal){
     let db=localStorage.getItem('twpro_testes_db');
@@ -365,6 +365,7 @@ function processarTesteGratis(event){
     if(!v.ok) return alert(v.msg);
     
     let chave=gerarChaveLatao(terminal);
+    let dataAtual=new Date().toLocaleDateString('pt-BR');
     
     // SALVA TESTE
     let db=localStorage.getItem('twpro_testes_db');
@@ -400,35 +401,48 @@ function processarTesteGratis(event){
     fd.append('link_pdf',LINK_PDF);
     fetch(form.action,{method:'POST',body:fd,headers:{'Accept':'application/json'}}).catch(()=>{});
     
-    // ⭐ 2. ENVIA EMAIL PARA VOCÊ (PROPRIETÁRIO) ⭐
+    // ⭐ 2. ENVIA WHATSAPP PARA O CLIENTE ⭐
+    let numCliente=whatsapp.replace(/\D/g,'');
+    let msgCliente='🎯 *TRADE WINNER PRO - Teste Ativado!* 🎯\n\n'+
+                   'Olá *'+nome+'*!\n\n'+
+                   '✅ Seu teste gratuito foi ativado com sucesso!\n\n'+
+                   '🔰 *Plano:* LATÃO 7 dias GRÁTIS\n'+
+                   '🔑 *Chave:* '+chave+'\n'+
+                   '📅 *Válido até:* '+expira.toLocaleDateString('pt-BR')+'\n\n'+
+                   '📥 *Baixe o EA:*\n'+LINK_EA+'\n\n'+
+                   '📘 *Manual PDF:*\n'+LINK_PDF+'\n\n'+
+                   '⚙️ *Como ativar:*\n'+
+                   '1. Instale o EA no MT5\n'+
+                   '2. No painel, clique em "ATIVAR LICENÇA"\n'+
+                   '3. Cole a chave acima\n\n'+
+                   '💬 Dúvidas? (41) 99976-5210\n\n'+
+                   'Bons trades! 🚀';
+    
+    window.open('https://wa.me/'+numCliente+'?text='+encodeURIComponent(msgCliente),'_blank');
+    
+    // ⭐ 3. ENVIA WHATSAPP PARA VOCÊ (PROPRIETÁRIO) ⭐
+    let msgProprietario='🔔 *NOVO TESTE GRÁTIS!* 🔔\n\n'+
+                        '👤 *Nome:* '+nome+'\n'+
+                        '📱 *WhatsApp:* '+whatsapp+'\n'+
+                        '📧 *Email:* '+email+'\n'+
+                        '🖥️ *Terminal ID:* '+terminal+'\n'+
+                        '🔑 *Chave:* '+chave+'\n'+
+                        '📅 *Data:* '+new Date().toLocaleString('pt-BR')+'\n'+
+                        '🏷️ *Plano:* LATÃO 7 dias GRÁTIS\n\n'+
+                        '✅ Cliente já recebeu WhatsApp e Email!';
+    
+    window.open('https://wa.me/'+SEU_WATS+'?text='+encodeURIComponent(msgProprietario),'_blank');
+    
+    // ⭐ 4. ENVIA EMAIL PARA VOCÊ (PROPRIETÁRIO) ⭐
     let fd2=new FormData();
     fd2.append('tipo','NOTIFICACAO_PROPRIETARIO');
-    fd2.append('assunto','🔔 NOVO TESTE SOLICITADO!');
-    fd2.append('mensagem',
-        '📢 NOVO PEDIDO DE TESTE GRÁTIS!\n\n'+
-        '👤 Nome: '+nome+'\n'+
-        '📱 WhatsApp: '+whatsapp+'\n'+
-        '📧 Email: '+email+'\n'+
-        '🖥️ Terminal ID: '+terminal+'\n'+
-        '🔑 Chave Gerada: '+chave+'\n'+
-        '📅 Data: '+new Date().toLocaleString('pt-BR')+'\n'+
-        '🏷️ Plano: LATÃO 7 dias GRÁTIS\n\n'+
-        '✅ O cliente já recebeu o email com a chave e links!'
-    );
-    fd2.append('_replyto',SEU_EMAIL);
-    fd2.append('_subject','🔔 NOVO TESTE - '+nome+' - '+terminal);
-    
-    fetch(form.action,{method:'POST',body:fd2,headers:{'Accept':'application/json'}})
-    .then(()=>console.log('✅ Email para proprietário enviado'))
-    .catch(()=>console.log('⚠️ Erro email proprietário'));
-    
-    // ⭐ 3. ENVIA WHATSAPP PARA VOCÊ (opcional - abre seu WhatsApp) ⭐
-    // Descomente a linha abaixo se quiser receber WhatsApp também:
-    // let msgWats='🔔 *NOVO TESTE GRÁTIS!*%0A%0A👤 '+nome+'%0A📱 '+whatsapp+'%0A🖥️ '+terminal+'%0A🔑 '+chave+'%0A📅 '+new Date().toLocaleString('pt-BR');
-    // window.open('https://wa.me/'+SEU_WATS+'?text='+msgWats,'_blank');
+    fd2.append('assunto','🔔 NOVO TESTE - '+nome+' - '+terminal);
+    fd2.append('mensagem','📢 NOVO PEDIDO DE TESTE GRÁTIS!\n\n👤 Nome: '+nome+'\n📱 WhatsApp: '+whatsapp+'\n📧 Email: '+email+'\n🖥️ Terminal ID: '+terminal+'\n🔑 Chave: '+chave+'\n📅 Data: '+new Date().toLocaleString('pt-BR')+'\n🏷️ Plano: LATÃO 7 dias\n\n✅ Cliente já recebeu os dados!');
+    fd2.append('_subject','🔔 NOVO TESTE - '+nome);
+    fetch(form.action,{method:'POST',body:fd2,headers:{'Accept':'application/json'}}).catch(()=>{});
     
     form.reset();
-    alert('✅ CADASTRO REALIZADO!\n\n🔰 Plano LATÃO - 7 dias GRÁTIS\n\n📧 Você receberá um email com:\n  • Chave de ativação\n  • Link para baixar o EA\n  • Link do Manual PDF\n\nVerifique sua caixa de entrada!');
+    alert('✅ CADASTRO REALIZADO COM SUCESSO!\n\n🔰 Plano LATÃO - 7 dias GRÁTIS\n\n📱 Abrimos o WhatsApp com sua chave!\n📧 Você também receberá um email.\n\nVerifique seu WhatsApp e email!');
     return false;
 }
 </script>
